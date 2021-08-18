@@ -1,0 +1,6 @@
+
+
+void decode(instructions, bytes)
+{
+
+}
