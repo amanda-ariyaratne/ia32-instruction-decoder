@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "registers.c"
 
+#include "decoder.c"
+
 int main() {
 
     FILE *fptr;
