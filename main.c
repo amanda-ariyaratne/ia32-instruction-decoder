@@ -1,40 +1,44 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "registers.c"
-
-#include "decoder.c"
+#include "opcode_tabel.c"
+// #include "decoder.c"
 
 int main() {
 
-    FILE *fptr;
+    initialize_opcode_map();
+    int a = opcode_4(1,1,1);
+    printf("%d \n", a);
 
-    fptr = fopen("sample.txt", "r");
-    char *instructions = malloc(1000 * sizeof(char));
-    int len = 0;
-    int c;
+    // FILE *fptr;
 
-    if (fptr == NULL)
-    {
-        printf("The file does not exist.");
-        exit(1);
-    }
+    // fptr = fopen("sample.txt", "r");
+    // char *instructions = malloc(1000 * sizeof(char));
+    // int len = 0;
+    // int c;
 
-    while ((c = fgetc(fptr)) != EOF)
-    {
-        instructions[len++] = (char) c;
-    }
-    instructions[len] = '\0';
-    fclose(fptr);
+    // if (fptr == NULL)
+    // {
+    //     printf("The file does not exist.");
+    //     exit(1);
+    // }
 
-    /** Decode **/
+    // while ((c = fgetc(fptr)) != EOF)
+    // {
+    //     instructions[len++] = (char) c;
+    // }
+    // instructions[len] = '\0';
+    // fclose(fptr);
 
-    int byte_size = len / 2;
-    decode(instructions, byte_size);
+    // /** Decode **/
+
+    // int byte_size = len / 2;
+    // decode(instructions, byte_size);
     
 
-    /** End Decode  **/
+    // /** End Decode  **/
 
-    free(instructions);
+    // free(instructions);
 
     return 0;
 }
