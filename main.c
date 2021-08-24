@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "registers.c"
-
+#include "opcode_tabel.c"
 #include "decoder.c"
 
 int convertHexToInt(char c);
 
 int main() {
-
     FILE *fptr;
 
     fptr = fopen("sample.txt", "r");
@@ -32,15 +31,15 @@ int main() {
     instructions[len] = '\0';
     fclose(fptr);
 
-    /** Decode **/
+    // /** Decode **/
 
-    int byte_size = len / 2;
-    decode(instructions, byte_size);
+    // int byte_size = len / 2;
+    // decode(instructions, byte_size);
     
 
-    /** End Decode  **/
+    // /** End Decode  **/
 
-    free(instructions);
+    // free(instructions);
 
     return 0;
 }
