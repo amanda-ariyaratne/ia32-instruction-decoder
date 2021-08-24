@@ -14,7 +14,7 @@ void decode(int* instructions, int bytes)
 {
     int cur_byte = -1;
     int byte;
-    int prefix = -1;
+    int prefix = 0;
     int esc_1 = -1;
     int esc_2 = -1;
     int opcode = -1;
@@ -27,7 +27,7 @@ void decode(int* instructions, int bytes)
     int dis = -1;
     int immd = -1;
 
-    while (cur_byte != bytes)
+    while (true)
     {
         byte = getNextByte(instructions, ++cur_byte, bytes);
         if (byte == -1)
@@ -101,8 +101,8 @@ void decode(int* instructions, int bytes)
 
         // printf("immd = %d\n", immd);
 
-        // executeInstruction();
-        // resetVariablesBeforeNextInstruction();
+        executeInstruction();
+        resetVariablesBeforeNextInstruction();
     }
 }
 

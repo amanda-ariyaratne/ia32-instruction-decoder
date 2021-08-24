@@ -12,6 +12,21 @@ enum prefix {
     ADD_SIZE = 0x67
 };
 
+enum i_prefix {
+    i_NON = 0,
+    i_LOCK = 1,
+    i_REPNE = 2,
+    i_REP_REPE = 3,
+    i_SEG_CS = 4,
+    i_SEG_SS = 5,
+    i_SEG_DS = 6,
+    i_SEG_ES = 7,
+    i_SEG_FS = 8,
+    i_SEG_GS = 9,
+    i_OP_SIZE = 10,
+    i_ADD_SIZE = 11
+};
+
 const int OP_2_BYTE_ESCAPE = 0x0F;
 const int OP_3_BYTE_ESCAPE_1 = 0x38;
 const int OP_3_BYTE_ESCAPE_2 = 0x3A;
