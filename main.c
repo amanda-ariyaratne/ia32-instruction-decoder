@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "registers.c"
 
 #include "decoder.c"
 
@@ -35,6 +36,7 @@ int main() {
 
     int byte_size = len / 2;
     decode(instructions, byte_size);
+    
 
     /** End Decode  **/
 
