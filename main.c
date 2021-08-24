@@ -2,33 +2,34 @@
 #include <stdlib.h>
 #include "registers.c"
 #include "opcode_tabel.c"
-// #include "decoder.c"
+#include "decoder.c"
+
+int convertHexToInt(char c);
 
 int main() {
+    FILE *fptr;
 
-    initialize_opcode_map();
-    int a = opcode_4(1,1,1);
-    printf("%d \n", a);
+    fptr = fopen("sample.txt", "r");
+    int *instructions = malloc(1000 * sizeof(int));
+    int len = 0;
+    char c;
 
-    // FILE *fptr;
+    if (fptr == NULL)
+    {
+        printf("The file does not exist. Exit Program.");
+        exit(1);
+    }
 
-    // fptr = fopen("sample.txt", "r");
-    // char *instructions = malloc(1000 * sizeof(char));
-    // int len = 0;
-    // int c;
-
-    // if (fptr == NULL)
-    // {
-    //     printf("The file does not exist.");
-    //     exit(1);
-    // }
-
-    // while ((c = fgetc(fptr)) != EOF)
-    // {
-    //     instructions[len++] = (char) c;
-    // }
-    // instructions[len] = '\0';
-    // fclose(fptr);
+    while ((c = fgetc(fptr)) != EOF)
+    {
+        if (c == ' ')
+        {
+            continue;
+        }
+        instructions[len++] = convertHexToInt(c);
+    }
+    instructions[len] = '\0';
+    fclose(fptr);
 
     // /** Decode **/
 
@@ -41,4 +42,52 @@ int main() {
     // free(instructions);
 
     return 0;
+}
+
+int convertHexToInt(char c)
+{
+    switch(c)
+    {
+        case '0':
+            return 0;
+        case '1':
+            return 1;
+        case '2':
+            return 2;
+        case '3':
+            return 3;
+        case '4':
+            return 4;
+        case '5':
+            return 5;
+        case '6':
+            return 6;
+        case '7':
+            return 7;
+        case '8':
+            return 8;
+        case '9':
+            return 9;
+        case 'a':
+        case 'A':
+            return 10;
+        case 'b':
+        case 'B':
+            return 11;
+        case 'c':
+        case 'C':
+            return 12;
+        case 'd':
+        case 'D':
+            return 13;
+        case 'e':
+        case 'E':
+            return 14;
+        case 'f':
+        case 'F':
+            return 15;
+        default:
+            printf("Invalid input. Exit Program.");
+            exit(1);
+    }
 }

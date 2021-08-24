@@ -1,7 +1,16 @@
 #include <stdbool.h>
 #include "enums.c"
 
-void decode(char* instructions, int bytes)
+void decode(int* instructions, int bytes);
+bool isPrefix(int byte);
+bool isEscapeCode(int byte);
+int getNextByte(int* instructions, int current_byte, int total_bytes);
+bool isModRMPresent(int prefix, int esc_1, int esc_2, int opcode);
+bool isSIBPresent(int mod);
+bool isDisplacementPresent();
+bool isImmediateValuePresent();
+
+void decode(int* instructions, int bytes)
 {
     int cur_byte = -1;
     int byte;
@@ -18,13 +27,19 @@ void decode(char* instructions, int bytes)
     int dis = -1;
     int immd = -1;
 
-    while (byte = getNextByte(instructions, ++cur_byte, bytes))
+    while (cur_byte != bytes)
     {
+        byte = getNextByte(instructions, ++cur_byte, bytes);
+        if (byte == -1)
+            break;
+
         if (isPrefix(byte))
         {
             prefix = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
         }
+
+        // printf("prefix = %d\n", prefix);
             
         while (isEscapeCode(byte))
         {
@@ -38,40 +53,62 @@ void decode(char* instructions, int bytes)
                 byte = getNextByte(instructions, ++cur_byte, bytes);
             }
         }
+
+        // printf("esc_1 = %d\n", esc_1);
+        // printf("esc_2 = %d\n", esc_2);
         
         opcode = byte;
-        byte = getNextByte(instructions, ++cur_byte, bytes);
+
+        // printf("opcode = %d\n", opcode);
 
         if (isModRMPresent(prefix, esc_1, esc_2, opcode))
         {
-            int mod = byte && 7;
-            int reg_or_op = byte && 56;
-            int rm = byte && 192;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            mod = byte & 7;
+            reg_or_op = (byte & 56) >> 3;
+            rm = (byte & 192) >> 6;
         }
+
+        // printf("mod = %d\n", mod);
+        // printf("reg_or_op = %d\n", reg_or_op);
+        // printf("rm = %d\n", rm);
 
         if (isSIBPresent(mod))
         {
-            scale = byte && 7;
-            index = byte && 56;
-            base = byte && 192;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            scale = byte & 7;
+            index = (byte & 56) >> 3;
+            base = (byte & 192) >> 6;
         }
+
+        // printf("scale = %d\n", scale);
+        // printf("index = %d\n", index);
+        // printf("base = %d\n", base);
         
         if (isDisplacementPresent())
         {
-            dis = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            dis = byte;
         }
+
+        // printf("dis = %d\n", dis);
 
         if (isImmediateValuePresent())
         {
+            byte = getNextByte(instructions, ++cur_byte, bytes);
             immd = byte;
         }
 
-        executeInstruction();
-        resetVariablesBeforeNextInstruction();
+        // printf("immd = %d\n", immd);
+
+        // executeInstruction();
+        // resetVariablesBeforeNextInstruction();
     }
+}
+
+bool isImmediateValuePresent()
+{
+    return false;
 }
 
 bool isDisplacementPresent()
@@ -89,14 +126,15 @@ bool isModRMPresent(int prefix, int esc_1, int esc_2, int opcode)
     return true;
 }
 
-int getNextByte(char* instructions, int current_byte, int total_bytes)
+int getNextByte(int* instructions, int current_byte, int total_bytes)
 {
     if (current_byte == total_bytes)
     {
         return -1;
     }
 
-    int byte = (instructions[current_byte] << 4) + instructions[current_byte + 1];
+    int byte = (instructions[(2*current_byte)] << 4) + instructions[(2*current_byte) + 1];
+
     return byte;
 }
 
