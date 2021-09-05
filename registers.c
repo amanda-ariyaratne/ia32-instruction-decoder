@@ -13,7 +13,7 @@ unsigned int edi = 0x0;
 
 int reg(int reg_num, int w)
 {
-    if (w == 0) {
+    if (w == 1) {
         switch (reg_num)
         {
             case 0:
@@ -109,3 +109,53 @@ int flags()
 }
 
 
+void reg_store(int reg_num, int w, unsigned int val)
+{
+    if (w == 1) {
+        switch (reg_num)
+        {
+            case 0:
+                eax = val;
+            case 1:
+                ecx = val;
+            case 2:
+                edx = val;
+            case 3:
+                ebx = val;
+            case 4:
+                esp = val;
+            case 5:
+                ebp = val;
+            case 6:
+                esi = val;
+            case 7:
+                edi = val;
+            default:
+                printf("Invalid register. Exit Program.");
+                exit(1);
+        }
+    } else {
+        switch(reg_num)
+        {
+            case 0:
+                eax = (eax & 0xffffff00) + (val & 255);
+            case 1:
+                ecx = (ecx & 0xffffff00) + (val & 255);
+            case 2:
+                edx = (edx & 0xffffff00) + (val & 255);
+            case 3:
+                ebx = (ebx & 0xffffff00) + (val & 255);
+            case 4:
+                esp = (esp & 0xffffff00) + (val & 255);
+            case 5:
+                ebp = (ebp & 0xffffff00) + (val & 255);
+            case 6:
+                esi = (esi & 0xffffff00) + (val & 255);
+            case 7:
+                edi = (edi & 0xffffff00) + (val & 255);
+            default:
+                printf("Invalid register. Exit Program.");
+                exit(1);
+        }   
+    }
+}

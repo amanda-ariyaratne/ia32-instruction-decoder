@@ -13,7 +13,7 @@ enum prefix {
 };
 
 enum i_prefix {
-    i_NON = 0,
+    i_NONE = 0,
     i_LOCK = 1,
     i_REPNE = 2,
     i_REP_REPE = 3,

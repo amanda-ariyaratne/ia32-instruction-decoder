@@ -25,6 +25,7 @@ void decode(int* instructions, int bytes)
     int index = -1;
     int base = -1;
     int dis = -1;
+    int disSize = -1;
     int immd = -1;
 
     while (true)
@@ -39,91 +40,109 @@ void decode(int* instructions, int bytes)
             byte = getNextByte(instructions, ++cur_byte, bytes);
         }
 
-        // printf("prefix = %d\n", prefix);
-            
-        while (isEscapeCode(byte))
+        if (byte == OP_2_BYTE_ESCAPE)
         {
-            if (esc_1 == -1)
-            {
-                esc_1 = byte;
-                byte = getNextByte(instructions, ++cur_byte, bytes);
-            } else
-            {
-                esc_2 = byte;
-                byte = getNextByte(instructions, ++cur_byte, bytes);
-            }
-        }
+            esc_1 = byte;
+            byte = getNextByte(instructions, ++cur_byte, bytes);
+        } 
 
-        // printf("esc_1 = %d\n", esc_1);
-        // printf("esc_2 = %d\n", esc_2);
+        if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte = OP_3_BYTE_ESCAPE_2))
+        {
+            esc_2 = byte;
+            byte = getNextByte(instructions, ++cur_byte, bytes);
+        }
         
         opcode = byte;
 
-        // printf("opcode = %d\n", opcode);
+        Opcode opcode_details;
+        if (esc_1 == -1)
+            opcode_details = one_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+        else if (esc_2 == -1)
+            opcode_details = two_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+        else if (esc_2 == OP_3_BYTE_ESCAPE_1)
+            opcode_details = three_byte_opcode_map_1[opcode & 0xf0][opcode & 0x0f][prefix];
+        else if (esc_2 == OP_3_BYTE_ESCAPE_2)
+            opcode_details = three_byte_opcode_map_2[opcode & 0xf0][opcode & 0x0f][prefix];
 
-        if (isModRMPresent(prefix, esc_1, esc_2, opcode))
+        if (opcode_details.modRM)
         {
             byte = getNextByte(instructions, ++cur_byte, bytes);
             mod = byte & 7;
             reg_or_op = (byte & 56) >> 3;
             rm = (byte & 192) >> 6;
+
+            if(isSIBPresent(mod, reg_or_op, rm))
+            {
+                byte = getNextByte(instructions, ++cur_byte, bytes);
+                scale = byte & 7;
+                index = (byte & 56) >> 3;
+                base = (byte & 192) >> 6;
+            }
+
+            disSize = getDisSize(mod, reg_or_op, rm);
+
+            switch (disSize)
+            {
+                case 1:
+                    byte = getNextByte(instructions, ++cur_byte, bytes);
+                    dis = byte;
+                    break;
+                case 4:
+                    byte = getNextByte(instructions, ++cur_byte, bytes);
+                    dis = byte;
+                    byte = getNextByte(instructions, ++cur_byte, bytes);
+                    dis += (dis << 8) + byte;
+                    byte = getNextByte(instructions, ++cur_byte, bytes);
+                    dis += (dis << 8) + byte;
+                    byte = getNextByte(instructions, ++cur_byte, bytes);
+                    dis += (dis << 8) + byte;
+                    break;
+                default:
+                    break;
+            }
         }
 
-        // printf("mod = %d\n", mod);
-        // printf("reg_or_op = %d\n", reg_or_op);
-        // printf("rm = %d\n", rm);
-
-        if (isSIBPresent(mod))
-        {
-            byte = getNextByte(instructions, ++cur_byte, bytes);
-            scale = byte & 7;
-            index = (byte & 56) >> 3;
-            base = (byte & 192) >> 6;
-        }
-
-        // printf("scale = %d\n", scale);
-        // printf("index = %d\n", index);
-        // printf("base = %d\n", base);
-        
-        if (isDisplacementPresent())
-        {
-            byte = getNextByte(instructions, ++cur_byte, bytes);
-            dis = byte;
-        }
-
-        // printf("dis = %d\n", dis);
-
-        if (isImmediateValuePresent())
+        if (opcode_details.immdSize)
         {
             byte = getNextByte(instructions, ++cur_byte, bytes);
             immd = byte;
         }
-
-        // printf("immd = %d\n", immd);
 
         executeInstruction();
         resetVariablesBeforeNextInstruction();
     }
 }
 
-bool isImmediateValuePresent()
+bool isSIBPresent(int mod, int reg_or_op, int rm)
 {
-    return false;
+    switch (mod)
+    {
+        case 0:
+        case 1:
+            if rm == 4:
+                return true;
+            return false;
+
+        default:
+            return false;
+    }
 }
 
-bool isDisplacementPresent()
+bool getDisSize(int mod, int reg_or_op, int rm)
 {
-    return true;
-}
-
-bool isSIBPresent(int mod)
-{
-    return true;
-}
-
-bool isModRMPresent(int prefix, int esc_1, int esc_2, int opcode)
-{
-    return true;
+    switch (mod)
+    {
+        case 0:
+            if rm == 5:
+                return 4;
+            return 0;
+        case 1:
+            return 1;
+        case 2:
+            return 4;
+        default:
+            return 0;
+    }
 }
 
 int getNextByte(int* instructions, int current_byte, int total_bytes)
@@ -136,19 +155,6 @@ int getNextByte(int* instructions, int current_byte, int total_bytes)
     int byte = (instructions[(2*current_byte)] << 4) + instructions[(2*current_byte) + 1];
 
     return byte;
-}
-
-bool isEscapeCode(int byte)
-{
-    switch(byte)
-    {
-        case OP_2_BYTE_ESCAPE:
-        case OP_3_BYTE_ESCAPE_1:
-        case OP_3_BYTE_ESCAPE_2:
-            return true;
-        default:
-            return false;
-    }
 }
 
 bool isPrefix(int byte)
@@ -170,4 +176,61 @@ bool isPrefix(int byte)
         default:
             return false;
     }
+}
+
+int getAddrFromSIB_8bit(int mod, int scale, int index, int base, int dis)
+{
+    int addr;
+    int w_bit = 0;
+
+    if (base == 5)
+    {
+        addr = reg(index, w_bit) * scale + reg(base, w_bit);
+    } else {
+        switch (mod)
+        {
+            case 0:
+                addr = reg(index, w_bit) * scale + dis;
+                break;
+            case 1:
+            case 2:
+                addr = reg(index, w_bit) * scale + dis + reg(5, w_bit);
+                break;  
+            default:
+                break;
+        }
+    }
+
+    return addr;
+}
+
+int getAddrFromSIB_32bit(int mod, int scale, int index, int base, int dis)
+{
+    int addr;
+    int w_bit = 1;
+
+    if (base == 5)
+    {
+        addr = reg(index, w_bit) * scale + reg(base, w_bit);
+    } else {
+        switch (mod)
+        {
+            case 0:
+                addr = reg(index, w_bit) * scale + dis;
+                break;
+            case 1:
+            case 2:
+                addr = reg(index, w_bit) * scale + dis + reg(5, w_bit);
+                break;  
+            default:
+                break;
+        }
+    }
+
+    return addr;
+}
+
+int sign_extend(int val)
+{
+    
 }
