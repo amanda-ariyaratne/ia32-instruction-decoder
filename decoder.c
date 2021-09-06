@@ -67,11 +67,11 @@ void decode(int* instructions, int bytes)
         if (opcode_details.modRM)
         {
             byte = getNextByte(instructions, ++cur_byte, bytes);
-            mod = byte & 7;
+            rm = byte & 7;
             reg_or_op = (byte & 56) >> 3;
-            rm = (byte & 192) >> 6;
+            mod = (byte & 192) >> 6;
 
-            if(isSIBPresent(mod, reg_or_op, rm))
+            if(isSIBPresent(mod, rm))
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
                 scale = byte & 7;
@@ -113,16 +113,15 @@ void decode(int* instructions, int bytes)
     }
 }
 
-bool isSIBPresent(int mod, int reg_or_op, int rm)
+bool isSIBPresent(int mod, int rm)
 {
     switch (mod)
     {
         case 0:
         case 1:
+        case 2:
             if rm == 4:
                 return true;
-            return false;
-
         default:
             return false;
     }
@@ -178,49 +177,81 @@ bool isPrefix(int byte)
     }
 }
 
-int getAddrFromSIB_8bit(int mod, int scale, int index, int base, int dis)
+int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, int dis)
 {
     int addr;
-    int w_bit = 0;
-
-    if (base == 5)
+    int w_bit = 1;
+    switch (mod)
     {
-        addr = reg(index, w_bit) * scale + reg(base, w_bit);
-    } else {
-        switch (mod)
-        {
-            case 0:
-                addr = reg(index, w_bit) * scale + dis;
-                break;
-            case 1:
-            case 2:
-                addr = reg(index, w_bit) * scale + dis + reg(5, w_bit);
-                break;  
-            default:
-                break;
-        }
+        case 0:
+            switch (rm)
+            {
+                case 4:
+                    addr = getAddrFromSIB(mod, scale, index, base, dis);
+                    break;
+                case 5:
+                    addr = dis;
+                    break;
+                default:
+                    addr = reg(rm, w_bit);
+                    break;
+            }
+            break;
+        case 1:
+            switch (rm)
+            {
+                case 4:
+                    addr = getAddrFromSIB(mod, scale, index, base, dis);
+                    break;
+                default:
+                    addr = reg(rm, w_bit);
+                    break;
+            }
+            addr += sign_extend(dis);
+            break;
+        case 2:
+            switch (rm)
+            {
+                case 4:
+                    addr = getAddrFromSIB(mod, scale, index, base, dis);
+                    break;
+                default:
+                    addr = reg(rm, w_bit);
+                    break;
+            }
+            addr += dis;
+            break;
+        default:
+            break;
     }
 
     return addr;
 }
 
-int getAddrFromSIB_32bit(int mod, int scale, int index, int base, int dis)
+int getAddrFromSIB(int mod, int scale, int index, int base, int dis)
 {
     int addr;
     int w_bit = 1;
-
-    if (base == 5)
+    if (base != 5)
     {
-        addr = reg(index, w_bit) * scale + reg(base, w_bit);
+        switch (index)
+        {
+            case 4:
+                addr = reg(base, w_bit);
+                break;
+            default:
+                addr = reg(index, w_bit) * (2 << scale) + reg(base, w_bit);
+                break;
+        }
     } else {
         switch (mod)
         {
             case 0:
-                addr = reg(index, w_bit) * scale + dis;
+                addr = reg(index, w_bit) * (2 << scale) + dis;
                 break;
             case 1:
             case 2:
-                addr = reg(index, w_bit) * scale + dis + reg(5, w_bit);
+                addr = reg(index, w_bit) * (2 << scale) + dis + reg(5, w_bit);
                 break;  
             default:
                 break;
@@ -232,5 +263,8 @@ int getAddrFromSIB_32bit(int mod, int scale, int index, int base, int dis)
 
 int sign_extend(int val)
 {
-    
+    int sign = (val & 0x80);
+    if (sign == 128)
+        return 0xffffff00 + val;
+    return val;
 }
