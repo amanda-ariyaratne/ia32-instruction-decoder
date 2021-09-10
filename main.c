@@ -33,13 +33,13 @@ int main() {
 
     init_one_byte_opcode_map();
 
-    // /** Decode **/
+    /** Decode **/
 
     int byte_size = len / 2;
     decode(instructions, byte_size);
     
 
-    // /** End Decode  **/
+    /** End Decode  **/
 
     free(instructions);
 

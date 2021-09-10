@@ -2,7 +2,7 @@
 #include "enums.c"
 #include "opcode_table.c"
 
-#ifndef DECODER
+// #ifndef DECODER
 #define DECODER
 
 void decode(int* instructions, int bytes);
@@ -42,21 +42,26 @@ void decode(int* instructions, int bytes)
         {
             prefix = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            printf("prefix %d \n", byte);
         }
 
         if (byte == OP_2_BYTE_ESCAPE)
         {
             esc_1 = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            printf("escape1 %d \n", byte);
         } 
 
         if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte == OP_3_BYTE_ESCAPE_2))
         {
             esc_2 = byte;
+            printf("escape2 %d \n", byte);
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            
         }
         
         opcode = byte;
+        printf("opcode %d \n", byte);
 
         struct Opcode opcode_details;
         if (esc_1 == -1)
@@ -95,11 +100,11 @@ void decode(int* instructions, int bytes)
                     byte = getNextByte(instructions, ++cur_byte, bytes);
                     dis = byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     break;
                 default:
                     break;
@@ -112,8 +117,10 @@ void decode(int* instructions, int bytes)
             for (int i = 0; i < opcode_details.immdSize; i++)
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
-                immd += (immd << 8) + byte;
+                immd = ((immd << 8) + byte);
             }
+
+            printf("immediate %d \n", immd);
         }
 
         // Execute Instruction
@@ -202,4 +209,4 @@ bool isPrefix(int byte)
     }
 }
 
-#endif
+// #endif
