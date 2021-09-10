@@ -28,7 +28,7 @@ void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int bas
 
 void add_reg_to_rm_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    if (mod == 1)
+    if (mod == 3)
         add_reg1_to_reg2_8bit(mod, reg, rm, scale, index, base, dis, immd);
     else
         add_reg_to_mem_8bit(mod, reg, rm, scale, index, base, dis, immd);
@@ -57,7 +57,7 @@ void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int ba
 
 void add_reg_to_rm_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    if (mod == 1)
+    if (mod == 3)
         add_reg1_to_reg2_32bit(mod, reg, rm, scale, index, base, dis, immd);
     else
         add_reg_to_mem_32bit(mod, reg, rm, scale, index, base, dis, immd);
@@ -86,7 +86,7 @@ void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int bas
 
 void add_rm_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    if (mod == 1)
+    if (mod == 3)
         add_reg2_to_reg_1_8bit(mod, reg, rm, scale, index, base, dis, immd);
     else
         add_mem_to_reg_8bit(mod, reg, rm, scale, index, base, dis, immd);
@@ -115,7 +115,7 @@ void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int ba
 
 void add_rm_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    if (mod == 1)
+    if (mod == 3)
         add_reg2_to_reg1_32bit(mod, reg, rm, scale, index, base, dis, immd);
     else
         add_mem_to_reg_32bit(mod, reg, rm, scale, index, base, dis, immd);

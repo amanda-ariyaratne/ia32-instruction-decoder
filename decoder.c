@@ -7,7 +7,7 @@
 
 void decode(int* instructions, int bytes);
 bool isSIBPresent(int mod, int rm);
-int getDisSize(int mod, int rm);
+int getDisSize(int mod, int rm, int base);
 int getNextByte(int* instructions, int current_byte, int total_bytes);
 bool isPrefix(int byte);
 unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis);
@@ -88,7 +88,7 @@ void decode(int* instructions, int bytes)
                 base = (byte & 192) >> 6;
             }
 
-            disSize = getDisSize(mod, rm);
+            disSize = getDisSize(mod, rm, base);
 
             switch (disSize)
             {
@@ -157,12 +157,14 @@ bool isSIBPresent(int mod, int rm)
     }
 }
 
-int getDisSize(int mod, int rm)
+int getDisSize(int mod, int rm, int base)
 {
     switch (mod)
     {
         case 0:
             if (rm == 5)
+                return 4;
+            else if (rm == 4 && base == 5)
                 return 4;
             return 0;
         case 1:

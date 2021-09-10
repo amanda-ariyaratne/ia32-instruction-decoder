@@ -89,10 +89,10 @@ unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned in
                 switch (index)
                 {
                     case 4:
-                        addr = reg_load(5, w_bit) + dis;
+                        addr = reg_load(5, w_bit);
                         break;
                     default:
-                        addr = reg_load(index, w_bit) * (2 << scale) + dis + reg_load(5, w_bit);
+                        addr = reg_load(index, w_bit) * (2 << scale) + reg_load(5, w_bit);
                         break;
                 }
                 break;  
