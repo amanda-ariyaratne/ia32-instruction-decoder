@@ -80,6 +80,10 @@ void decode(int* instructions, int bytes)
             reg_or_op = (byte & 56) >> 3;
             mod = (byte & 192) >> 6;
 
+            printf("mod %d \n", mod);
+            printf("reg or op %d \n", reg_or_op);
+            printf("rm %d \n", rm);
+
             if(isSIBPresent(mod, rm))
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
