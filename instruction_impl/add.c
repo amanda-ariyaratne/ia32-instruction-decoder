@@ -75,7 +75,7 @@ void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int bas
     unsigned int op2 = mem_load(addr);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, w_bit, val); // TODO: function mem_store
+    mem_store(addr, val);
 }
 
 void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -86,7 +86,7 @@ void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int ba
     unsigned int op2 = mem_load(addr);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, w_bit, val); // TODO: function mem_store
+    mem_store(addr, val);
 }
 
 void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -151,7 +151,7 @@ void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
-    mem_store(addr, w_bit, val);    // TODO: function mem_store
+    mem_store(addr, val);
 }
 
 void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -162,7 +162,7 @@ void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, in
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
-    mem_store(addr, w_bit, val);    // TODO: function mem_store
+    mem_store(addr, val);
 }
 
 void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -173,7 +173,7 @@ void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale,
     unsigned int op2 = sign_extend(immd);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, w_bit, val);    // TODO: function mem_store
+    mem_store(addr, val);
 }
 
 #endif

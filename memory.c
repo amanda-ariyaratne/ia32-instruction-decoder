@@ -1,29 +1,59 @@
 #ifndef MEMORY
 #define MEMORY
 
-// #define SIZE 100
+#define SIZE 20
 
-// struct MemLoc {
-//    unsigned int addr;   
-//    unsigned int val;
-// };
+struct MemLoc {
+   unsigned int addr;   
+   unsigned int val;
+};
 
-// struct MemLoc* hashArray[SIZE]; 
-// struct MemLoc* dummyItem;
-// struct MemLoc* item;
+struct MemLoc* mem[SIZE]; 
+struct MemLoc* item;
 
-// int hashCode(int key) {
-//    return key % SIZE;
-// }
-
-unsigned int mem_load(unsigned int addr)
-{
-    return 5;
+unsigned int hash(unsigned int addr) {
+   return addr % SIZE;
 }
 
-void mem_store(unsigned int addr, int w_bit, unsigned int val)
+unsigned int mem_load(unsigned int addr) {
+    int hashIndex = hash(addr);  
+   
+    while(mem[hashIndex] != NULL) {
+        if(mem[hashIndex]->addr == addr)
+            return mem[hashIndex]->val; 
+      
+        ++hashIndex;
+        hashIndex %= SIZE;
+   }        
+	
+   return 0;        
+}
+
+void mem_store(unsigned int addr, unsigned int val)
 {
-    return;
+    int hashIndex = hash(addr);  
+   
+    while(mem[hashIndex] != NULL) {
+        if(mem[hashIndex]->addr == addr)
+        {
+            mem[hashIndex]->val = val; 
+            return;
+        }
+        ++hashIndex;
+        hashIndex %= SIZE;
+   }        
+	
+    struct MemLoc *item = (struct MemLoc*) malloc(sizeof(item));
+    item->addr = addr;  
+    item->val = val;
+
+    while(mem[hashIndex] != NULL) {
+        ++hashIndex;
+        hashIndex %= SIZE;
+    }
+	
+   mem[hashIndex] = item;
+   return;
 }
 
 #endif
