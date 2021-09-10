@@ -112,7 +112,7 @@ void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, in
     reg_store(rm, w_bit, val);
 }
 
-void add_immd_to_al_ax_eax_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(0, w_bit);   // TODO: remove hardcode val of register 0
@@ -122,7 +122,7 @@ void add_immd_to_al_ax_eax_8bit(int mod, int reg, int rm, int scale, int index, 
     reg_store(0, w_bit, val);
 }
 
-void add_immd_to_al_ax_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(0, w_bit);   // TODO: remove hardcode val of register 0

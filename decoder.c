@@ -104,12 +104,31 @@ void decode(int* instructions, int bytes)
 
         if (opcode_details.immdSize)
         {
-            byte = getNextByte(instructions, ++cur_byte, bytes);
-            immd = byte;
+            immd = 0;
+            for (int i = 0; i < immdSize; i++)
+            {
+                byte = getNextByte(instructions, ++cur_byte, bytes);
+                immd += (immd << 8) + byte;
+            }
         }
 
-        executeInstruction();
-        resetVariablesBeforeNextInstruction();
+        // Execute Instruction
+        opcode_details.instruction(mod, reg, rm, scale, index, base, dis, immd);
+
+        // Reset Variables Before Next Instruction
+        int prefix = 0;
+        int esc_1 = -1;
+        int esc_2 = -1;
+        int opcode = -1;
+        int mod = -1;
+        int reg_or_op = -1;
+        int rm = -1;
+        int scale = -1;
+        int index = -1;
+        int base = -1;
+        int dis = -1;
+        int disSize = -1;
+        int immd = -1;
     }
 }
 
