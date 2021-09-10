@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "registers.c"
-#include "opcode_tabel.c"
+#include "opcode_table.c"
 #include "decoder.c"
 
 int convertHexToInt(char c);
@@ -30,6 +30,8 @@ int main() {
     }
     instructions[len] = '\0';
     fclose(fptr);
+
+    init_one_byte_opcode_map();
 
     // /** Decode **/
 

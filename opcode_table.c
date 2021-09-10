@@ -1,5 +1,19 @@
+#include <stdbool.h>
 #include "instruction_impl.h"
-#include "structs.h"
+
+#ifndef STRUCT_OPCODE
+#define STRUCT_OPCODE
+
+struct Opcode {
+   int immdSize;
+   bool modRM;
+   void (*instruction) (int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd);
+};
+
+#endif
+
+#ifndef OPCODE_MAP
+#define OPCODE_MAP
 
 struct Opcode one_byte_opcode_map[16][16][12];
 struct Opcode two_byte_opcode_map[16][16][12];
@@ -37,3 +51,5 @@ void init_one_byte_opcode_map(){
     // one_byte_opcode_map[][][0].instruction = &;
 
 }
+
+#endif

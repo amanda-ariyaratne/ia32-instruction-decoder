@@ -1,3 +1,6 @@
+#ifndef PREFIXES
+#define PREFIXES
+
 enum prefix {
     LOCK = 0xF0,
     REPNE = 0xF2,
@@ -27,6 +30,13 @@ enum i_prefix {
     i_ADD_SIZE = 11
 };
 
+#endif
+
+#ifndef ESC_CODES
+#define ESC_CODES
+
 const int OP_2_BYTE_ESCAPE = 0x0F;
 const int OP_3_BYTE_ESCAPE_1 = 0x38;
 const int OP_3_BYTE_ESCAPE_2 = 0x3A;
+
+#endif

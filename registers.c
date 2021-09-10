@@ -1,5 +1,20 @@
 #include <string.h>
-#include <stdio.h>
+
+#ifndef EFLAGS
+#define EFLAGS
+
+// flag register
+unsigned int eflags = 0x246;
+
+int flags()
+{
+    return eflags;
+}
+
+#endif
+
+#ifndef GENERAL_PURPOSE_REGISTERS
+#define GENERAL_PURPOSE_REGISTERS
 
 // registers
 unsigned int eax = 0xbf8db144;
@@ -11,7 +26,7 @@ unsigned int ebp = 0xbf8db118;
 unsigned int esi = 0x9a0ca0;
 unsigned int edi = 0x0;
 
-int reg(int reg_num, int w)
+unsigned int reg_load(int reg_num, int w)
 {
     if (w == 1) {
         switch (reg_num)
@@ -33,7 +48,6 @@ int reg(int reg_num, int w)
             case 7:
                 return edi;
             default:
-                printf("Invalid register. Exit Program.");
                 exit(1);
         }
     } else {
@@ -56,11 +70,64 @@ int reg(int reg_num, int w)
             case 7:
                 return edi & 255;
             default:
-                printf("Invalid register. Exit Program.");
                 exit(1);
         }   
     }
 }
+
+void reg_store(int reg_num, int w, unsigned int val)
+{
+    if (w == 1) {
+        switch (reg_num)
+        {
+            case 0:
+                eax = val;
+            case 1:
+                ecx = val;
+            case 2:
+                edx = val;
+            case 3:
+                ebx = val;
+            case 4:
+                esp = val;
+            case 5:
+                ebp = val;
+            case 6:
+                esi = val;
+            case 7:
+                edi = val;
+            default:
+                exit(1);
+        }
+    } else {
+        switch(reg_num)
+        {
+            case 0:
+                eax = (eax & 0xffffff00) + (val & 255);
+            case 1:
+                ecx = (ecx & 0xffffff00) + (val & 255);
+            case 2:
+                edx = (edx & 0xffffff00) + (val & 255);
+            case 3:
+                ebx = (ebx & 0xffffff00) + (val & 255);
+            case 4:
+                esp = (esp & 0xffffff00) + (val & 255);
+            case 5:
+                ebp = (ebp & 0xffffff00) + (val & 255);
+            case 6:
+                esi = (esi & 0xffffff00) + (val & 255);
+            case 7:
+                edi = (edi & 0xffffff00) + (val & 255);
+            default:
+                exit(1);
+        }   
+    }
+}
+
+#endif
+
+#ifndef SEGMENT_REGISTERS
+#define SEGMENT_REGISTERS
 
 // Segment Register (sreg) Field
 unsigned int cs =  0x73; 
@@ -87,10 +154,14 @@ int sreg(int sreg_addr)
         case 5:
             return gs;
         default:
-            printf("Invalid SREG. Exit Program.");
             exit(1);
     }
 }
+
+#endif
+
+#ifndef INSTRUCTION_POINT_REGISTERS
+#define INSTRUCTION_POINT_REGISTERS
 
 // Instruction Pointer Register
 unsigned int eip = 0x8048354;
@@ -100,62 +171,4 @@ int next_instruction()
     return eip;
 }
 
-// flag register
-unsigned int eflags = 0x246;
-
-int flags()
-{
-    return eflags;
-}
-
-
-void reg_store(int reg_num, int w, unsigned int val)
-{
-    if (w == 1) {
-        switch (reg_num)
-        {
-            case 0:
-                eax = val;
-            case 1:
-                ecx = val;
-            case 2:
-                edx = val;
-            case 3:
-                ebx = val;
-            case 4:
-                esp = val;
-            case 5:
-                ebp = val;
-            case 6:
-                esi = val;
-            case 7:
-                edi = val;
-            default:
-                printf("Invalid register. Exit Program.");
-                exit(1);
-        }
-    } else {
-        switch(reg_num)
-        {
-            case 0:
-                eax = (eax & 0xffffff00) + (val & 255);
-            case 1:
-                ecx = (ecx & 0xffffff00) + (val & 255);
-            case 2:
-                edx = (edx & 0xffffff00) + (val & 255);
-            case 3:
-                ebx = (ebx & 0xffffff00) + (val & 255);
-            case 4:
-                esp = (esp & 0xffffff00) + (val & 255);
-            case 5:
-                ebp = (ebp & 0xffffff00) + (val & 255);
-            case 6:
-                esi = (esi & 0xffffff00) + (val & 255);
-            case 7:
-                edi = (edi & 0xffffff00) + (val & 255);
-            default:
-                printf("Invalid register. Exit Program.");
-                exit(1);
-        }   
-    }
-}
+#endif

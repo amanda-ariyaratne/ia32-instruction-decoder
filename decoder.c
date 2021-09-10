@@ -1,14 +1,18 @@
 #include <stdbool.h>
 #include "enums.c"
+#include "opcode_table.c"
+
+#ifndef DECODER
+#define DECODER
 
 void decode(int* instructions, int bytes);
-bool isPrefix(int byte);
-bool isEscapeCode(int byte);
+bool isSIBPresent(int mod, int rm);
+int getDisSize(int mod, int rm);
 int getNextByte(int* instructions, int current_byte, int total_bytes);
-bool isModRMPresent(int prefix, int esc_1, int esc_2, int opcode);
-bool isSIBPresent(int mod);
-bool isDisplacementPresent();
-bool isImmediateValuePresent();
+bool isPrefix(int byte);
+unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis);
+unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned int dis);
+unsigned int sign_extend(unsigned int val);
 
 void decode(int* instructions, int bytes)
 {
@@ -46,7 +50,7 @@ void decode(int* instructions, int bytes)
             byte = getNextByte(instructions, ++cur_byte, bytes);
         } 
 
-        if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte = OP_3_BYTE_ESCAPE_2))
+        if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte == OP_3_BYTE_ESCAPE_2))
         {
             esc_2 = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
@@ -54,7 +58,7 @@ void decode(int* instructions, int bytes)
         
         opcode = byte;
 
-        Opcode opcode_details;
+        struct Opcode opcode_details;
         if (esc_1 == -1)
             opcode_details = one_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
         else if (esc_2 == -1)
@@ -79,7 +83,7 @@ void decode(int* instructions, int bytes)
                 base = (byte & 192) >> 6;
             }
 
-            disSize = getDisSize(mod, reg_or_op, rm);
+            disSize = getDisSize(mod, rm);
 
             switch (disSize)
             {
@@ -105,7 +109,7 @@ void decode(int* instructions, int bytes)
         if (opcode_details.immdSize)
         {
             immd = 0;
-            for (int i = 0; i < immdSize; i++)
+            for (int i = 0; i < opcode_details.immdSize; i++)
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
                 immd += (immd << 8) + byte;
@@ -113,7 +117,7 @@ void decode(int* instructions, int bytes)
         }
 
         // Execute Instruction
-        opcode_details.instruction(mod, reg, rm, scale, index, base, dis, immd);
+        opcode_details.instruction(mod, reg_or_op, rm, scale, index, base, dis, immd);
 
         // Reset Variables Before Next Instruction
         prefix = 0;
@@ -139,19 +143,19 @@ bool isSIBPresent(int mod, int rm)
         case 0:
         case 1:
         case 2:
-            if rm == 4:
+            if (rm == 4)
                 return true;
         default:
             return false;
     }
 }
 
-bool getDisSize(int mod, int reg_or_op, int rm)
+int getDisSize(int mod, int rm)
 {
     switch (mod)
     {
         case 0:
-            if rm == 5:
+            if (rm == 5)
                 return 4;
             return 0;
         case 1:
@@ -196,94 +200,4 @@ bool isPrefix(int byte)
     }
 }
 
-unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis)
-{
-    unsigned int addr;
-    int w_bit = 1;
-    switch (mod)
-    {
-        case 0:
-            switch (rm)
-            {
-                case 4:
-                    addr = getAddrFromSIB(mod, scale, index, base, dis);
-                    break;
-                case 5:
-                    addr = dis;
-                    break;
-                default:
-                    addr = reg(rm, w_bit);
-                    break;
-            }
-            break;
-        case 1:
-            switch (rm)
-            {
-                case 4:
-                    addr = getAddrFromSIB(mod, scale, index, base, dis);
-                    break;
-                default:
-                    addr = reg(rm, w_bit);
-                    break;
-            }
-            addr += sign_extend(dis);
-            break;
-        case 2:
-            switch (rm)
-            {
-                case 4:
-                    addr = getAddrFromSIB(mod, scale, index, base, dis);
-                    break;
-                default:
-                    addr = reg(rm, w_bit);
-                    break;
-            }
-            addr += dis;
-            break;
-        default:
-            break;
-    }
-
-    return addr;
-}
-
-unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned int dis)
-{
-    unsigned int addr;
-    int w_bit = 1;
-    if (base != 5)
-    {
-        switch (index)
-        {
-            case 4:
-                addr = reg(base, w_bit);
-                break;
-            default:
-                addr = reg(index, w_bit) * (2 << scale) + reg(base, w_bit);
-                break;
-        }
-    } else {
-        switch (mod)
-        {
-            case 0:
-                addr = reg(index, w_bit) * (2 << scale) + dis;
-                break;
-            case 1:
-            case 2:
-                addr = reg(index, w_bit) * (2 << scale) + dis + reg(5, w_bit);
-                break;  
-            default:
-                break;
-        }
-    }
-
-    return addr;
-}
-
-unsigned int sign_extend(unsigned int val)
-{
-    int sign = (val & 0x00000080);
-    if (sign == 128)
-        return 0xffffff00 + val;
-    return val;
-}
+#endif
