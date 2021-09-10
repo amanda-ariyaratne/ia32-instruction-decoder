@@ -157,6 +157,8 @@ int getDisSize(int mod, int rm)
         case 0:
             if (rm == 5)
                 return 4;
+            else if (rm == 4 && base == 5)
+                return 4;
             return 0;
         case 1:
             return 1;

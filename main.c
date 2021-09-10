@@ -35,13 +35,13 @@ int main() {
 
     // /** Decode **/
 
-    // int byte_size = len / 2;
-    // decode(instructions, byte_size);
+    int byte_size = len / 2;
+    decode(instructions, byte_size);
     
 
     // /** End Decode  **/
 
-    // free(instructions);
+    free(instructions);
 
     return 0;
 }
