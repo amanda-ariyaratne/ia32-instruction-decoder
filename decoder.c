@@ -24,9 +24,9 @@ void decode(int* instructions, int bytes)
     int scale = -1;
     int index = -1;
     int base = -1;
-    int dis = -1;
+    unsigned int dis = -1;
     int disSize = -1;
-    int immd = -1;
+    unsigned int immd = -1;
 
     while (true)
     {
@@ -116,19 +116,19 @@ void decode(int* instructions, int bytes)
         opcode_details.instruction(mod, reg, rm, scale, index, base, dis, immd);
 
         // Reset Variables Before Next Instruction
-        int prefix = 0;
-        int esc_1 = -1;
-        int esc_2 = -1;
-        int opcode = -1;
-        int mod = -1;
-        int reg_or_op = -1;
-        int rm = -1;
-        int scale = -1;
-        int index = -1;
-        int base = -1;
-        int dis = -1;
-        int disSize = -1;
-        int immd = -1;
+        prefix = 0;
+        esc_1 = -1;
+        esc_2 = -1;
+        opcode = -1;
+        mod = -1;
+        reg_or_op = -1;
+        rm = -1;
+        scale = -1;
+        index = -1;
+        base = -1;
+        dis = -1;
+        disSize = -1;
+        immd = -1;
     }
 }
 
@@ -196,9 +196,9 @@ bool isPrefix(int byte)
     }
 }
 
-int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, int dis)
+unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis)
 {
-    int addr;
+    unsigned int addr;
     int w_bit = 1;
     switch (mod)
     {
@@ -247,9 +247,9 @@ int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base
     return addr;
 }
 
-int getAddrFromSIB(int mod, int scale, int index, int base, int dis)
+unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned int dis)
 {
-    int addr;
+    unsigned int addr;
     int w_bit = 1;
     if (base != 5)
     {
@@ -280,9 +280,9 @@ int getAddrFromSIB(int mod, int scale, int index, int base, int dis)
     return addr;
 }
 
-int sign_extend(int val)
+unsigned int sign_extend(unsigned int val)
 {
-    int sign = (val & 0x80);
+    int sign = (val & 0x00000080);
     if (sign == 128)
         return 0xffffff00 + val;
     return val;

@@ -1,4 +1,4 @@
-void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(reg, w_bit); 
@@ -8,7 +8,7 @@ void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int b
     reg_store(rm, w_bit, val);
 }
 
-void add_reg1_to_reg2_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg1_to_reg2_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(reg, w_bit); 
@@ -18,7 +18,7 @@ void add_reg1_to_reg2_32bit(int mod, int reg, int rm, int scale, int index, int 
     reg_store(rm, w_bit, val);
 }
 
-void add_reg2_to_reg_1_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg2_to_reg_1_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(reg, w_bit); 
@@ -28,7 +28,7 @@ void add_reg2_to_reg_1_8bit(int mod, int reg, int rm, int scale, int index, int 
     reg_store(reg, w_bit, val);
 }
 
-void add_reg2_to_reg_1_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg2_to_reg_1_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(reg, w_bit); 
@@ -38,7 +38,7 @@ void add_reg2_to_reg_1_32bit(int mod, int reg, int rm, int scale, int index, int
     reg_store(reg, w_bit, val);
 }
 
-void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(reg, w_bit);
@@ -49,7 +49,7 @@ void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int bas
     reg_store(reg, w_bit, val);
 }
 
-void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(reg, w_bit);
@@ -60,7 +60,7 @@ void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int ba
     reg_store(reg, w_bit, val);
 }
 
-void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(reg, w_bit);
@@ -71,7 +71,7 @@ void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int bas
     mem_store(addr, w_bit, val); // TODO: function mem_store
 }
 
-void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(reg, w_bit);
@@ -82,7 +82,7 @@ void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int ba
     mem_store(addr, w_bit, val); // TODO: function mem_store
 }
 
-void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(rm, w_bit);
@@ -92,7 +92,7 @@ void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int ba
     reg_store(rm, w_bit, val);
 }
 
-void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(rm, w_bit);
@@ -102,7 +102,7 @@ void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int b
     reg_store(rm, w_bit, val);
 }
 
-void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(rm, w_bit);
@@ -112,7 +112,7 @@ void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, in
     reg_store(rm, w_bit, val);
 }
 
-void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op1 = reg(0, w_bit);   // TODO: remove hardcode val of register 0
@@ -122,7 +122,7 @@ void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int bas
     reg_store(0, w_bit, val);
 }
 
-void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg(0, w_bit);   // TODO: remove hardcode val of register 0
@@ -132,7 +132,7 @@ void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int b
     reg_store(0, w_bit, val);
 }
 
-void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
@@ -143,7 +143,7 @@ void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int
     mem_store(addr, w_bit, val);    // TODO: function mem_store
 }
 
-void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
@@ -154,7 +154,7 @@ void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, in
     mem_store(addr, w_bit, val);    // TODO: function mem_store
 }
 
-void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, int dis, int immd)
+void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
