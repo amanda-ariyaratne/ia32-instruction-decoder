@@ -61,17 +61,17 @@ void decode(int* instructions, int bytes)
         }
         
         opcode = byte;
-        printf("opcode %d \n", byte);
+        printf("opcode %d %d \n", byte >> 4, byte & 0x0f);
 
         struct Opcode opcode_details;
         if (esc_1 == -1)
-            opcode_details = one_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = one_byte_opcode_map[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == -1)
-            opcode_details = two_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = two_byte_opcode_map[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == OP_3_BYTE_ESCAPE_1)
-            opcode_details = three_byte_opcode_map_1[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = three_byte_opcode_map_1[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == OP_3_BYTE_ESCAPE_2)
-            opcode_details = three_byte_opcode_map_2[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = three_byte_opcode_map_2[opcode >> 4][opcode & 0x0f][prefix];
 
         if (opcode_details.modRM)
         {
