@@ -74,11 +74,27 @@ unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned in
         switch (mod)
         {
             case 0:
-                addr = reg_load(index, w_bit) * (2 << scale) + dis;
+                switch (index)
+                {
+                    case 4:
+                        addr = dis;
+                        break;
+                    default:
+                        addr = reg_load(index, w_bit) * (2 << scale) + dis;
+                        break;
+                }
                 break;
             case 1:
             case 2:
-                addr = reg_load(index, w_bit) * (2 << scale) + dis + reg_load(5, w_bit);
+                switch (index)
+                {
+                    case 4:
+                        addr = reg_load(5, w_bit) + dis;
+                        break;
+                    default:
+                        addr = reg_load(index, w_bit) * (2 << scale) + dis + reg_load(5, w_bit);
+                        break;
+                }
                 break;  
             default:
                 break;
