@@ -42,9 +42,21 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[8][3][0].modRM = true;
     one_byte_opcode_map[8][3][0].instruction = &add_immd_to_reg_32bit_sign_extended;
 
-    // one_byte_opcode_map[0][0][0].immdSize = 0;
-    // one_byte_opcode_map[0][0][0].modRM = true;
-    // one_byte_opcode_map[0][0][0].instruction = &;
+    one_byte_opcode_map[0][0][0].immdSize = 0;
+    one_byte_opcode_map[0][0][0].modRM = true;
+    one_byte_opcode_map[0][0][0].instruction = &add_reg_to_rm_8bit;
+
+    one_byte_opcode_map[0][1][0].immdSize = 0;
+    one_byte_opcode_map[0][1][0].modRM = true;
+    one_byte_opcode_map[0][1][0].instruction = &add_reg_to_rm_32bit;
+
+    one_byte_opcode_map[0][2][0].immdSize = 0;
+    one_byte_opcode_map[0][2][0].modRM = true;
+    one_byte_opcode_map[0][2][0].instruction = &add_rm_to_reg_8bit;
+
+    one_byte_opcode_map[0][3][0].immdSize = 0;
+    one_byte_opcode_map[0][3][0].modRM = true;
+    one_byte_opcode_map[0][3][0].instruction = &add_rm_to_reg_32bit;
 
     // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
