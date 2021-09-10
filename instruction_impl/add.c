@@ -22,10 +22,10 @@ void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int bas
     int w_bit = 0;
     unsigned int op1 = reg_load(reg, w_bit);
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = mem_load(addr);
+    unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, val);
+    mem_store(addr, w_bit, val);
 }
 
 void add_reg_to_rm_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -53,10 +53,10 @@ void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int ba
     int w_bit = 1;
     unsigned int op1 = reg_load(reg, w_bit);
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = mem_load(addr);
+    unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, val);
+    mem_store(addr, w_bit, val);
 }
 
 void add_reg_to_rm_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -82,12 +82,13 @@ void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int bas
     int w_bit = 0;
     unsigned int op1 = reg_load(reg, w_bit);
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = mem_load(addr);
+    unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
     reg_store(reg, w_bit, val);
 }
 
+// tested
 void add_rm_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     if (mod == 3)
@@ -96,6 +97,7 @@ void add_rm_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base
         add_mem_to_reg_8bit(mod, reg, rm, scale, index, base, dis, immd);
 }
 
+// tested
 void add_reg2_to_reg1_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
@@ -106,12 +108,13 @@ void add_reg2_to_reg1_32bit(int mod, int reg, int rm, int scale, int index, int 
     reg_store(reg, w_bit, val);
 }
 
+// tested
 void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op1 = reg_load(reg, w_bit);
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = mem_load(addr); // TODO: function mem_load
+    unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
     reg_store(reg, w_bit, val);
@@ -173,7 +176,6 @@ void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int bas
     unsigned int val = op1 + op2;
 
     reg_store(0, w_bit, val);
-    printf("expect %d + %d = %d\n", op1, op2, val);
 }
 
 void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -192,33 +194,33 @@ void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int
 {
     int w_bit = 0;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op1 = mem_load(addr);
+    unsigned int op1 = mem_load(addr, w_bit);
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
-    mem_store(addr, val);
+    mem_store(addr, w_bit, val);
 }
 
 void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op1 = mem_load(addr);
+    unsigned int op1 = mem_load(addr, w_bit);
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
-    mem_store(addr, val);
+    mem_store(addr, w_bit, val);
 }
 
 void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op1 = mem_load(addr);
+    unsigned int op1 = mem_load(addr, w_bit);
     unsigned int op2 = sign_extend(immd);
 
     unsigned int val = op1 + op2;
-    mem_store(addr, val);
+    mem_store(addr, w_bit, val);
 }
 
 #endif
