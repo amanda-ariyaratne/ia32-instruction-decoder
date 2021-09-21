@@ -1,5 +1,6 @@
-#ifndef DECODER
-#define DECODER
+#ifndef DECODER2
+#define DECODER2
+
 unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis);
 unsigned int getAddrFromSIB(int mod, int scale, int index, int base, unsigned int dis);
 unsigned int sign_extend(unsigned int val);

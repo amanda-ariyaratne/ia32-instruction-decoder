@@ -1,9 +1,8 @@
 #include "../registers.c"
 #include "../memory.c"
 #include "../decoder2.c"
-
-#include "./add.c"
-#include "./and.c"
+#include "add.c"
+#include "and.c"
 
 #ifndef GROUP_1A
 #define GROUP_1A

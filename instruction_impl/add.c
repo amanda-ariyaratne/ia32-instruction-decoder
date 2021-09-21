@@ -5,6 +5,8 @@
 #ifndef ADD
 #define ADD
 
+// TODO : Set OF, SF, ZF, AF, CF, and PF flags accordingly
+
 void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     printf("INS: Add reg1 to reg2 8bit\n");
@@ -14,7 +16,6 @@ void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int b
     unsigned int val = op1 + op2;
 
     reg_store(rm, w_bit, val);
-    printf("expect %d + %d = %d\n", op1, op2, val);
 }
 
 void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -45,7 +46,6 @@ void add_reg1_to_reg2_32bit(int mod, int reg, int rm, int scale, int index, int 
     unsigned int val = op1 + op2;
 
     reg_store(rm, w_bit, val);
-    printf("expect %u + %u = %u \n", op1, op2, val);
 }
 
 void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -138,7 +138,6 @@ void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int ba
     unsigned int val = op1 + op2;
 
     reg_store(rm, w_bit, val);
-    printf("expect %u + %u = %u \n", op1, op2, val);
 }
 
 void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -150,7 +149,6 @@ void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int b
     unsigned int val = op1 + op2;
 
     reg_store(rm, w_bit, val);
-    printf("expect %u + %u = %u \n", op1, op2, val);
 }
 
 void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -162,19 +160,15 @@ void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, in
     unsigned int val = op1 + op2;
 
     reg_store(rm, w_bit, val);
-    printf("expect %u + %u = %u \n", op1, op2, val);
 }
 
 void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("INS: Add imm8 to AL\n");
-
     int w_bit = 0;
     unsigned int op1 = reg_load(0, w_bit);   // TODO: remove hardcode val of register 0
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
-
     reg_store(0, w_bit, val);
 }
 
@@ -187,7 +181,6 @@ void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int b
 
     unsigned int val = op1 + op2;
     reg_store(0, w_bit, val);
-    printf("expect %u + %u = %u\n", op1, op2, val);
 }
 
 void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
