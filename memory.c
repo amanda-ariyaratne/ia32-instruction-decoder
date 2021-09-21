@@ -15,12 +15,18 @@ unsigned int hash(unsigned int addr) {
    return addr % SIZE;
 }
 
-unsigned int mem_load(unsigned int addr) {
+unsigned int mem_load(unsigned int addr, int w) {
     int hashIndex = hash(addr);  
    
     while(mem[hashIndex] != NULL) {
         if(mem[hashIndex]->addr == addr)
-            return mem[hashIndex]->val; 
+        {
+            if (w)
+                return mem[hashIndex]->val; 
+            else
+                return (mem[hashIndex]->val) & 255;
+        }
+            
       
         ++hashIndex;
         hashIndex %= SIZE;
@@ -29,14 +35,18 @@ unsigned int mem_load(unsigned int addr) {
    return 0;        
 }
 
-void mem_store(unsigned int addr, unsigned int val)
+void mem_store(unsigned int addr, int w, unsigned int val)
 {
     int hashIndex = hash(addr);  
    
     while(mem[hashIndex] != NULL) {
         if(mem[hashIndex]->addr == addr)
         {
-            mem[hashIndex]->val = val; 
+            if (w)
+                mem[hashIndex]->val = val; 
+            else
+                mem[hashIndex]->val = (mem[hashIndex]->val & 0xffffff00) + (val & 255);
+            
             return;
         }
         ++hashIndex;

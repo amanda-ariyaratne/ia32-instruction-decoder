@@ -2,12 +2,12 @@
 #include "enums.c"
 #include "opcode_table.c"
 
-#ifndef DECODER
+// #ifndef DECODER
 #define DECODER
 
 void decode(int* instructions, int bytes);
 bool isSIBPresent(int mod, int rm);
-int getDisSize(int mod, int rm);
+int getDisSize(int mod, int rm, int base);
 int getNextByte(int* instructions, int current_byte, int total_bytes);
 bool isPrefix(int byte);
 unsigned int getEffectiveAddressFromModRM(int mod, int rm, int scale, int index, int base, unsigned int dis);
@@ -42,31 +42,36 @@ void decode(int* instructions, int bytes)
         {
             prefix = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            printf("prefix %d \n", byte);
         }
 
         if (byte == OP_2_BYTE_ESCAPE)
         {
             esc_1 = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            printf("escape1 %d \n", byte);
         } 
 
         if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte == OP_3_BYTE_ESCAPE_2))
         {
             esc_2 = byte;
+            printf("escape2 %d \n", byte);
             byte = getNextByte(instructions, ++cur_byte, bytes);
+            
         }
         
         opcode = byte;
+        printf("opcode %d %d \n", byte >> 4, byte & 0x0f);
 
         struct Opcode opcode_details;
         if (esc_1 == -1)
-            opcode_details = one_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = one_byte_opcode_map[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == -1)
-            opcode_details = two_byte_opcode_map[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = two_byte_opcode_map[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == OP_3_BYTE_ESCAPE_1)
-            opcode_details = three_byte_opcode_map_1[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = three_byte_opcode_map_1[opcode >> 4][opcode & 0x0f][prefix];
         else if (esc_2 == OP_3_BYTE_ESCAPE_2)
-            opcode_details = three_byte_opcode_map_2[opcode & 0xf0][opcode & 0x0f][prefix];
+            opcode_details = three_byte_opcode_map_2[opcode >> 4][opcode & 0x0f][prefix];
 
         if (opcode_details.modRM)
         {
@@ -74,6 +79,10 @@ void decode(int* instructions, int bytes)
             rm = byte & 7;
             reg_or_op = (byte & 56) >> 3;
             mod = (byte & 192) >> 6;
+
+            printf("mod %d \n", mod);
+            printf("reg or op %d \n", reg_or_op);
+            printf("rm %d \n", rm);
 
             if(isSIBPresent(mod, rm))
             {
@@ -83,7 +92,7 @@ void decode(int* instructions, int bytes)
                 base = (byte & 192) >> 6;
             }
 
-            disSize = getDisSize(mod, rm);
+            disSize = getDisSize(mod, rm, base);
 
             switch (disSize)
             {
@@ -95,11 +104,11 @@ void decode(int* instructions, int bytes)
                     byte = getNextByte(instructions, ++cur_byte, bytes);
                     dis = byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     byte = getNextByte(instructions, ++cur_byte, bytes);
-                    dis += (dis << 8) + byte;
+                    dis = (dis << 8) + byte;
                     break;
                 default:
                     break;
@@ -112,8 +121,10 @@ void decode(int* instructions, int bytes)
             for (int i = 0; i < opcode_details.immdSize; i++)
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
-                immd += (immd << 8) + byte;
+                immd = ((immd << 8) + byte);
             }
+
+            printf("immediate %d \n", immd);
         }
 
         // Execute Instruction
@@ -150,12 +161,14 @@ bool isSIBPresent(int mod, int rm)
     }
 }
 
-int getDisSize(int mod, int rm)
+int getDisSize(int mod, int rm, int base)
 {
     switch (mod)
     {
         case 0:
             if (rm == 5)
+                return 4;
+            else if (rm == 4 && base == 5)
                 return 4;
             return 0;
         case 1:
@@ -200,4 +213,4 @@ bool isPrefix(int byte)
     }
 }
 
-#endif
+// #endif

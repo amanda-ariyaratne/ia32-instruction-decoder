@@ -124,29 +124,39 @@ unsigned int reg_load(int reg_num, int w)
                 exit(1);
         }   
     }
+    printf("%d %d", eax, edx);
 }
 
 void reg_store(int reg_num, int w, unsigned int val)
 {
+    
     if (w == 1) {
         switch (reg_num)
         {
             case 0:
                 eax = val;
+                break;
             case 1:
                 ecx = val;
+                break;
             case 2:
                 edx = val;
+                break;
             case 3:
                 ebx = val;
+                break;
             case 4:
                 esp = val;
+                break;
             case 5:
                 ebp = val;
+                break;
             case 6:
                 esi = val;
+                break;
             case 7:
                 edi = val;
+                break;
             default:
                 exit(1);
         }
@@ -155,20 +165,28 @@ void reg_store(int reg_num, int w, unsigned int val)
         {
             case 0:
                 eax = (eax & 0xffffff00) + (val & 255);
+                break;
             case 1:
                 ecx = (ecx & 0xffffff00) + (val & 255);
+                break;
             case 2:
                 edx = (edx & 0xffffff00) + (val & 255);
+                break;
             case 3:
                 ebx = (ebx & 0xffffff00) + (val & 255);
+                break;
             case 4:
                 esp = (esp & 0xffffff00) + (val & 255);
+                break;
             case 5:
                 ebp = (ebp & 0xffffff00) + (val & 255);
+                break;
             case 6:
                 esi = (esi & 0xffffff00) + (val & 255);
+                break;
             case 7:
                 edi = (edi & 0xffffff00) + (val & 255);
+                break;
             default:
                 exit(1);
         }   
