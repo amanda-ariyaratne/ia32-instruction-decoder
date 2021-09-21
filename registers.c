@@ -6,10 +6,61 @@
 // flag register
 unsigned int eflags = 0x246;
 
-int flags()
+unsigned int flags()
 {
     return eflags;
 }
+
+void set_flag_id(){eflags |= (1 << 21);}
+void clear_flag_id(){eflags &= ~(1 << 21);}
+
+void set_flag_vip(){eflags |= (1 << 20);}
+void clear_flag_vip(){eflags &= ~(1 << 20);}
+
+void set_flag_vif(){eflags |= (1 << 19);}
+void clear_flag_vif(){eflags &= ~(1 << 19);}
+
+void set_flag_ac(){eflags |= (1 << 18);}
+void clear_flag_ac(){eflags &= ~(1 << 18);}
+
+void set_flag_vm(){eflags |= (1 << 17);}
+void clear_flag_vm(){eflags &= ~(1 << 17);}
+
+void set_flag_rf(){eflags |= (1 << 16);}
+void clear_flag_rf(){eflags &= ~(1 << 16);}
+
+void set_flag_nt(){eflags |= (1 << 14);}
+void clear_flag_nt(){eflags &= ~(1 << 14);}
+
+void set_flag_iopl(){}  // TODO
+void clear_flag_iopl(){}
+
+void set_flag_of(){eflags |= (1 << 11);}
+void clear_flag_of(){eflags &= ~(1 << 11);}
+
+void set_flag_df(){eflags |= (1 << 10);}
+void clear_flag_df(){eflags &= ~(1 << 10);}
+
+void set_flag_if(){eflags |= (1 << 9);}
+void clear_flag_if(){eflags &= ~(1 << 9);}
+
+void set_flag_tf(){eflags |= (1 << 8);}
+void clear_flag_tf(){eflags &= ~(1 << 8);}
+
+void set_flag_sf(){eflags |= (1 << 7);}
+void clear_flag_sf(){eflags &= ~(1 << 7);}
+
+void set_flag_zf(){eflags |= (1 << 6);}
+void clear_flag_zf(){eflags &= ~(1 << 6);}
+
+void set_flag_af(){eflags |= (1 << 4);}
+void clear_flag_af(){eflags &= ~(1 << 4);}
+
+void set_flag_pf(){eflags |= (1 << 2);}
+void clear_flag_pf(){eflags &= ~(1 << 2);}
+
+void set_flag_cf(){eflags |= (1 << 0);}
+void clear_flag_cf(){eflags &= ~(1 << 0);}
 
 #endif
 
