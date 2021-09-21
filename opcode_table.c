@@ -95,9 +95,15 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[2][3][0].modRM = true;
     one_byte_opcode_map[2][3][0].instruction = &and_rm_to_reg_32bit;
 
+    // LEA
     one_byte_opcode_map[8][13][0].immdSize = 0;
     one_byte_opcode_map[8][13][0].modRM = true;
-    one_byte_opcode_map[8][13][0].instruction = &;
+    one_byte_opcode_map[8][13][0].instruction = &store_eff_addr_from_reg_32bit;
+
+    // mov
+    // one_byte_opcode_map[][][0].immdSize = ;
+    // one_byte_opcode_map[][][0].modRM = ;
+    // one_byte_opcode_map[][][0].instruction = &;
 
     // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
