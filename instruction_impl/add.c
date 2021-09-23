@@ -1,3 +1,5 @@
+#include <stdbool.h>
+#include "flag_condition_tests.c"
 #include "../registers.c"
 #include "../memory.c"
 #include "../decoder2.c"
@@ -5,7 +7,9 @@
 #ifndef ADD
 #define ADD
 
-// TODO : Set OF, SF, ZF, AF, CF, and PF flags accordingly
+void setAddFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit);
+
+// TODO : Set AF and PF flags accordingly
 
 void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
@@ -15,6 +19,7 @@ void add_reg1_to_reg2_8bit(int mod, int reg, int rm, int scale, int index, int b
     unsigned int op2 = reg_load(rm, w_bit);
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 }
 
@@ -26,6 +31,8 @@ void add_reg_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int bas
     unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
 }
 
@@ -45,6 +52,7 @@ void add_reg1_to_reg2_32bit(int mod, int reg, int rm, int scale, int index, int 
     unsigned int op2 = reg_load(rm, w_bit);
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 }
 
@@ -56,6 +64,8 @@ void add_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int ba
     unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
 }
 
@@ -74,6 +84,7 @@ void add_reg2_to_reg_1_8bit(int mod, int reg, int rm, int scale, int index, int 
     unsigned int op2 = reg_load(rm, w_bit);
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
 }
 
@@ -85,6 +96,8 @@ void add_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int bas
     unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
 }
 
@@ -105,6 +118,7 @@ void add_reg2_to_reg1_32bit(int mod, int reg, int rm, int scale, int index, int 
     unsigned int op2 = reg_load(rm, w_bit);
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
 }
 
@@ -117,6 +131,8 @@ void add_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int ba
     unsigned int op2 = mem_load(addr, w_bit);
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
 }
 
@@ -137,6 +153,7 @@ void add_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int ba
     unsigned int op2 = immd;
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 }
 
@@ -148,6 +165,7 @@ void add_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int b
     unsigned int op2 = immd;
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 }
 
@@ -159,6 +177,7 @@ void add_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, in
     unsigned int op2 = sign_extend(immd);
     unsigned int val = op1 + op2;
 
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 }
 
@@ -169,6 +188,8 @@ void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int bas
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(0, w_bit, val);
 }
 
@@ -180,6 +201,8 @@ void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int b
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     reg_store(0, w_bit, val);
 }
 
@@ -191,6 +214,8 @@ void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
 }
 
@@ -202,6 +227,8 @@ void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, in
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
 }
 
@@ -213,7 +240,17 @@ void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale,
     unsigned int op2 = sign_extend(immd);
 
     unsigned int val = op1 + op2;
+
+    setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
+}
+
+void setAddFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit)
+{
+    if (hasAddCarry(op1, op2, val, w_bit)) set_flag_cf(); else clear_flag_cf();
+    if (hasAddOverflow(op1, op2, val, w_bit)) set_flag_of(); else clear_flag_of();
+    if (isResultZero(val, w_bit)) set_flag_zf(); else clear_flag_zf();
+    if (isResultNegative(val, w_bit)) set_flag_sf(); else clear_flag_sf();
 }
 
 #endif

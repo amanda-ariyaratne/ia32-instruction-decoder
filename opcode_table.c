@@ -105,7 +105,16 @@ void init_one_byte_opcode_map(){
     // one_byte_opcode_map[][][0].modRM = ;
     // one_byte_opcode_map[][][0].instruction = &;
 
-    // one_byte_opcode_map[][][0].immdSize = ;
+    // CMP
+    one_byte_opcode_map[3][12][0].immdSize = 1;
+    one_byte_opcode_map[3][12][0].modRM = false;
+    one_byte_opcode_map[3][12][0].instruction = &cmp_immd_with_al_8bit;
+
+    one_byte_opcode_map[3][13][0].immdSize = 4;
+    one_byte_opcode_map[3][13][0].modRM = false;
+    one_byte_opcode_map[3][13][0].instruction = &cmp_immd_with_eax_32bit;
+
+        // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
     // one_byte_opcode_map[][][0].instruction = &;
 
