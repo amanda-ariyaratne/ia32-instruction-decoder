@@ -37,6 +37,7 @@ void mov_reg2_to_reg1_32bit(int mod, int reg, int rm, int scale, int index, int 
     reg_store(reg, w_bit, op2);
 }
 
+// continue
 void mov_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
@@ -46,9 +47,9 @@ void mov_mem_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int bas
     reg_store(reg, w_bit, op2);
 }
 
-void mov_reg_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void mov_mem_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    int w_bit = 0;
+    int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
     unsigned int op2 = mem_load(addr, w_bit);
 
@@ -89,7 +90,6 @@ void mov_reg_to_rm_32bit(int mod, int reg, int rm, int scale, int index, int bas
         mov_reg_to_mem_32bit(mod, reg, rm, scale, index, base, dis, immd);
 }
 
-// tested
 void mov_rm_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     if (mod == 3)
@@ -107,55 +107,42 @@ void mov_rm_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int bas
         mov_mem_to_reg_32bit(mod, reg, rm, scale, index, base, dis, immd);
 }
 
+// immediate value 8bit
 void mov_immd_to_reg_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 0;
     unsigned int op2 = immd;
 
-    reg_store(rm, w_bit, op2);
+    reg_store(reg, w_bit, op2);
 }
 
+void mov_immd_to_mem_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+{
+    int w_bit = 0;
+    unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
+    unsigned int op2 = immd;
+
+    mem_store(addr, w_bit, op2);
+}
+
+void mov_immd_to_rm_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+{
+    if (mod == 3)
+        mov_immd_to_reg_8bit(mod, reg, rm, scale, index, base, dis, immd);
+    else
+        mov_immd_to_mem_8bit(mod, reg, rm, scale, index, base, dis, immd);
+}
+
+// immediate value 32bit
 void mov_immd_to_reg_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int op2 = immd;
 
-    reg_store(rm, w_bit, op2);
+    reg_store(reg, w_bit, op2);
 }
 
-void mov_immd_to_reg_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    int w_bit = 1;
-    unsigned int op2 = sign_extend(immd);
-    reg_store(rm, w_bit, op2);
-}
-
-void add_immd_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    int w_bit = 0;
-    unsigned int op2 = immd;
-
-    reg_store(0, w_bit, op2);
-}
-
-void add_immd_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    int w_bit = 1;
-    unsigned int op2 = immd;
-
-    reg_store(0, w_bit, op2);
-}
-
-void add_immd_to_memory_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    int w_bit = 0;
-    unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = immd;
-
-    mem_store(addr, w_bit, op2);
-}
-
-void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void mov_immd_to_mem_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = 1;
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
@@ -164,13 +151,32 @@ void add_immd_to_memory_32bit(int mod, int reg, int rm, int scale, int index, in
     mem_store(addr, w_bit, op2);
 }
 
-void add_immd_to_memory_32bit_sign_extended(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void mov_immd_to_rm_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    int w_bit = 1;
-    unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op2 = sign_extend(immd);
-
-    mem_store(addr, w_bit, op2);
+    if (mod == 3)
+        mov_immd_to_reg_32bit(mod, reg, rm, scale, index, base, dis, immd);
+    else
+        mov_immd_to_mem_32bit(mod, reg, rm, scale, index, base, dis, immd);
 }
+
+
+
+
+// void mov_mem_to_al_8bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+// {
+//     int w_bit = 0;
+//     unsigned int op2 = reg_load(0, w_bit); ;
+//     unsigned int addr = dis;
+
+//     reg_store(0, w_bit, op2);
+// }
+
+// void mov_mem_to_eax_32bit(int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+// {
+//     int w_bit = 1;
+//     unsigned int op2 = immd;
+
+//     reg_store(0, w_bit, op2);
+// }
 
 #endif
