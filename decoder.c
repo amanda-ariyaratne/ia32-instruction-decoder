@@ -127,6 +127,11 @@ void decode(int* instructions, int bytes)
             printf("immediate %d \n", immd);
         }
 
+        if (opcode_details.immdSize & !opcode_details.modRM)
+        {
+            reg_or_op = opcode & 7;
+        }
+
         // Execute Instruction
         opcode_details.instruction(mod, reg_or_op, rm, scale, index, base, dis, immd);
 
