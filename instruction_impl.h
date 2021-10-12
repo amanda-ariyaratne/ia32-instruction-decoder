@@ -4,4 +4,4 @@
 #include "instruction_impl/lea.c"
 #include "instruction_impl/mov.c"
 #include "instruction_impl/cmp.c"
-#include "instruction_impl/inc.c"
+#include "instruction_impl/inc_dec.c"
