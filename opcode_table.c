@@ -164,13 +164,13 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[12][7][0].instruction = &mov_immd_to_rm_32bit;
 
     // INC
-    one_byte_opcode_map[14][14][0].immdSize = 0;
-    one_byte_opcode_map[14][14][0].modRM = true;
-    one_byte_opcode_map[14][14][0].instruction = &inc_rm_8bit;
+    one_byte_opcode_map[15][14][0].immdSize = 0;
+    one_byte_opcode_map[15][14][0].modRM = true;
+    one_byte_opcode_map[15][14][0].instruction = &inc_rm_8bit;
     
-    one_byte_opcode_map[14][15][0].immdSize = 0;
-    one_byte_opcode_map[14][15][0].modRM = true;
-    one_byte_opcode_map[14][15][0].instruction = &inc_rm_32bit;
+    one_byte_opcode_map[15][15][0].immdSize = 0;
+    one_byte_opcode_map[15][15][0].modRM = true;
+    one_byte_opcode_map[15][15][0].instruction = &inc_rm_32bit;
 
     // CMP
     one_byte_opcode_map[3][12][0].immdSize = 1;
