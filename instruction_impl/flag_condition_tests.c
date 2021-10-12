@@ -68,4 +68,12 @@ bool isResultNegative(unsigned int val, int w_bit)
     return val & 0x00000080;
 }
 
+void setAddFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit)
+{
+    if (hasAddCarry(op1, op2, val, w_bit)) set_flag_cf(); else clear_flag_cf();
+    if (hasAddOverflow(op1, op2, val, w_bit)) set_flag_of(); else clear_flag_of();
+    if (isResultZero(val, w_bit)) set_flag_zf(); else clear_flag_zf();
+    if (isResultNegative(val, w_bit)) set_flag_sf(); else clear_flag_sf();
+}
+
 #endif

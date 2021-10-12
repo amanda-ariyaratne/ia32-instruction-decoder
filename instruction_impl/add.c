@@ -7,8 +7,6 @@
 #ifndef ADD
 #define ADD
 
-void setAddFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit);
-
 // TODO : Set AF and PF flags accordingly
 
 void add_reg1_to_reg2_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -243,14 +241,6 @@ void add_immd_to_memory_32bit_sign_extended(int opcode, int mod, int reg, int rm
 
     setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
-}
-
-void setAddFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit)
-{
-    if (hasAddCarry(op1, op2, val, w_bit)) set_flag_cf(); else clear_flag_cf();
-    if (hasAddOverflow(op1, op2, val, w_bit)) set_flag_of(); else clear_flag_of();
-    if (isResultZero(val, w_bit)) set_flag_zf(); else clear_flag_zf();
-    if (isResultNegative(val, w_bit)) set_flag_sf(); else clear_flag_sf();
 }
 
 #endif
