@@ -117,16 +117,27 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[8][11][0].modRM = true;
     one_byte_opcode_map[8][11][0].instruction = &mov_rm_to_reg_32bit;
 
-    // immediate
-    one_byte_opcode_map[12][6][0].immdSize = 1;
-    one_byte_opcode_map[12][6][0].modRM = true;
-    one_byte_opcode_map[12][6][0].instruction = &mov_immd_to_rm_8bit;
+    // // Mov (seg:offset) to AL
+    // one_byte_opcode_map[10][0][0].immdSize = 1;
+    // one_byte_opcode_map[10][0][0].modRM = false;
+    // one_byte_opcode_map[10][0][0].instruction = &mov_disp8_to_al_8bit;
 
-    one_byte_opcode_map[12][7][0].immdSize = 4;
-    one_byte_opcode_map[12][7][0].modRM = true;
-    one_byte_opcode_map[12][7][0].instruction = &mov_immd_to_rm_32bit;
+    // // Mov (seg:offset) to EAX
+    // one_byte_opcode_map[10][1][0].immdSize = 4;
+    // one_byte_opcode_map[10][1][0].modRM = false;
+    // one_byte_opcode_map[10][1][0].instruction = &mov_disp32_to_eax_32bit;
 
-    // 0 -> 7 = immd8
+    // // Mov AL to (seg:offset)
+    // one_byte_opcode_map[10][2][0].immdSize = 1;
+    // one_byte_opcode_map[10][2][0].modRM = false;
+    // one_byte_opcode_map[10][2][0].instruction = &mov_al_to_disp8_8bit;
+
+    // // Mov EAX to (seg:offset)
+    // one_byte_opcode_map[10][3][0].immdSize = 4;
+    // one_byte_opcode_map[10][3][0].modRM = false;
+    // one_byte_opcode_map[10][3][0].instruction = &mov_eax_to_disp32_32bit;
+    
+    // MOV imm8 to r8 (B|0 -> 7)
     int i;
     for (i = 0; i < 8; i++)
     {
@@ -134,30 +145,23 @@ void init_one_byte_opcode_map(){
         one_byte_opcode_map[11][i][0].modRM = false;
         one_byte_opcode_map[11][i][0].instruction = &mov_immd_to_reg_8bit;
     }
-    // 8 -> 15 = imm32
+    // MOV imm32 to r32 (B|8 -> 15)
     for (i = 8; i < 16; i++)
     {
         one_byte_opcode_map[11][i][0].immdSize = 4;
         one_byte_opcode_map[11][i][0].modRM = false;
         one_byte_opcode_map[11][i][0].instruction = &mov_immd_to_reg_32bit;
     }
-    
-    // // displacement & reg
-    // one_byte_opcode_map[11][0][0].immdSize = 0;
-    // one_byte_opcode_map[11][0][0].modRM = false;
-    // one_byte_opcode_map[11][0][0].instruction = &mov_mem_to_al_8bit;
 
-    // one_byte_opcode_map[11][1][0].immdSize = 0;
-    // one_byte_opcode_map[11][1][0].modRM = false;
-    // one_byte_opcode_map[11][1][0].instruction = &mov_mem_to_eax_32bit;
+    // MOV imm8 to rm8
+    one_byte_opcode_map[12][6][0].immdSize = 1;
+    one_byte_opcode_map[12][6][0].modRM = true;
+    one_byte_opcode_map[12][6][0].instruction = &mov_immd_to_rm_8bit;
 
-    // one_byte_opcode_map[11][2][0].immdSize = 0;
-    // one_byte_opcode_map[11][2][0].modRM = false;
-    // one_byte_opcode_map[11][2][0].instruction = &mov_al_to_mem_8bit;
-
-    // one_byte_opcode_map[11][3][0].immdSize = 0;
-    // one_byte_opcode_map[11][3][0].modRM = false;
-    // one_byte_opcode_map[11][3][0].instruction = &mov_eax_to_mem_32bit;
+    // MOV imm32 to rm32
+    one_byte_opcode_map[12][7][0].immdSize = 4;
+    one_byte_opcode_map[12][7][0].modRM = true;
+    one_byte_opcode_map[12][7][0].instruction = &mov_immd_to_rm_32bit;
 
     // CMP
     one_byte_opcode_map[3][12][0].immdSize = 1;
@@ -167,6 +171,16 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[3][13][0].immdSize = 4;
     one_byte_opcode_map[3][13][0].modRM = false;
     one_byte_opcode_map[3][13][0].instruction = &cmp_immd_with_eax_32bit;
+
+    // INC
+    one_byte_opcode_map[14][14][0].immdSize = 0;
+    one_byte_opcode_map[14][14][0].modRM = true;
+    one_byte_opcode_map[14][14][0].instruction = &inc_rm_8bit;
+    
+    one_byte_opcode_map[14][15][0].immdSize = 0;
+    one_byte_opcode_map[14][15][0].modRM = true;
+    one_byte_opcode_map[14][15][0].instruction = &inc_rm_32bit;
+
 
         // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
