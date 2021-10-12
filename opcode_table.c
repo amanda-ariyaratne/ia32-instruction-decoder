@@ -7,7 +7,7 @@
 struct Opcode {
    int immdSize;
    bool modRM;
-   void (*instruction) (int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd);
+   void (*instruction) (int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd);
 };
 
 #endif

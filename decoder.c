@@ -133,7 +133,7 @@ void decode(int* instructions, int bytes)
         }
 
         // Execute Instruction
-        opcode_details.instruction(mod, reg_or_op, rm, scale, index, base, dis, immd);
+        opcode_details.instruction(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
 
         // Reset Variables Before Next Instruction
         prefix = 0;
