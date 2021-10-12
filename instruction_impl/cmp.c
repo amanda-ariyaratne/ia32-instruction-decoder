@@ -35,10 +35,9 @@ void cmp_immd_with_eax_32bit(int opcode, int mod, int reg, int rm, int scale, in
 
 }
 
-void cmp_immd_with_reg_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void cmp_immd_with_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("Compare imm8 with reg8\n");
-    int w_bit = 0;
+    int w_bit = opcode & 1;
 
     unsigned int op1 = reg_load(rm, w_bit);
     unsigned int op2 = immd;
@@ -47,10 +46,9 @@ void cmp_immd_with_reg_8bit(int opcode, int mod, int reg, int rm, int scale, int
     setCmpFlags(op1, op2, val, w_bit);
 }
 
-void cmp_immd_with_mem_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void cmp_immd_with_mem(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("Compare imm8 with mem8\n");
-    int w_bit = 0;
+    int w_bit = opcode & 1;
 
     unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
     unsigned int op1 = mem_load(addr, w_bit);
@@ -60,45 +58,12 @@ void cmp_immd_with_mem_8bit(int opcode, int mod, int reg, int rm, int scale, int
     setCmpFlags(op1, op2, val, w_bit);
 }
 
-void cmp_immd_with_rm_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void cmp_immd_with_rm(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     if (mod == 3)
-        cmp_immd_with_reg_8bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+        cmp_immd_with_reg(opcode, mod, reg, rm, scale, index, base, dis, immd);
     else
-        cmp_immd_with_mem_8bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
-}
-
-void cmp_immd_with_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    printf("Compare imm32 with reg32\n");
-    int w_bit = 1;
-
-    unsigned int op1 = reg_load(rm, w_bit);
-    unsigned int op2 = immd;
-    unsigned int val = op1 - op2;
-
-    setCmpFlags(op1, op2, val, w_bit);
-}
-
-void cmp_immd_with_mem_32_bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    printf("Compare imm32 with mem32\n");
-    int w_bit = 1;
-
-    unsigned int addr = getEffectiveAddressFromModRM(mod, rm, scale, index, base, dis);
-    unsigned int op1 = mem_load(addr, w_bit);
-    unsigned int op2 = immd;
-    unsigned int val = op1 - op2;
-
-    setCmpFlags(op1, op2, val, w_bit);
-}
-
-void cmp_immd_with_rm_32bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    if (mod == 3)
-        cmp_immd_with_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
-    else
-        cmp_immd_with_mem_32_bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+        cmp_immd_with_mem(opcode, mod, reg, rm, scale, index, base, dis, immd);
 }
 
 void cmp_immd_with_reg_32bit_sign_extended(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)

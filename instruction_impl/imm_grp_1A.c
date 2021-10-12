@@ -8,25 +8,25 @@
 #ifndef GROUP_1A
 #define GROUP_1A
 
-void immd_to_reg_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void immd_to_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     if (reg == 0)
-        add_immd_to_reg_8bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+        add_immd_to_reg(opcode, mod, reg, rm, scale, index, base, dis, immd);
     else if (reg == 4)
-        and_immd_to_reg_8bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+        and_immd_to_reg(opcode, mod, reg, rm, scale, index, base, dis, immd);
     else if (reg == 7)
-        cmp_immd_with_rm_8bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+        cmp_immd_with_rm(opcode, mod, reg, rm, scale, index, base, dis, immd);
 }
 
-void immd_to_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    if (reg == 0)
-        add_immd_to_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
-    else if (reg == 4)
-        and_immd_to_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
-    else if (reg == 7)
-        cmp_immd_with_rm_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
-}
+// void immd_to_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+// {
+//     if (reg == 0)
+//         add_immd_to_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+//     else if (reg == 4)
+//         and_immd_to_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+//     else if (reg == 7)
+//         cmp_immd_with_rm_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
+// }
 
 void immd_to_reg_32bit_sign_extended(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
