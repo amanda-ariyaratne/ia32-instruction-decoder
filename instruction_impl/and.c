@@ -128,23 +128,9 @@ void and_rm_to_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int in
         and_mem_to_reg_32bit(opcode, mod, reg, rm, scale, index, base, dis, immd);
 }
 
-void and_immd_to_reg_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
+void and_immd_to_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("INS: And imm8 to reg 8bit\n");
-
-    int w_bit = 0;
-    unsigned int op1 = reg_load(rm, w_bit);
-    unsigned int op2 = immd;
-    unsigned int val = op1 & op2;
-
-    reg_store(rm, w_bit, val);
-    printf("expect %u & %u = %u \n", op1, op2, val);
-}
-
-void and_immd_to_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
-{
-    printf("INS: And imm32 to reg 32bit\n");
-    int w_bit = 1;
+    int w_bit = opcode & 1;
     unsigned int op1 = reg_load(rm, w_bit);
     unsigned int op2 = immd;
     unsigned int val = op1 & op2;
