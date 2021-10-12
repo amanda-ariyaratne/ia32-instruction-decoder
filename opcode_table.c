@@ -166,11 +166,17 @@ void init_one_byte_opcode_map(){
     // INC/DEC
     one_byte_opcode_map[15][14][0].immdSize = 0;
     one_byte_opcode_map[15][14][0].modRM = true;
-    one_byte_opcode_map[15][14][0].instruction = &inc_dec_rm_8bit;
+    one_byte_opcode_map[15][14][0].instruction = &inc_dec_rm;
     
     one_byte_opcode_map[15][15][0].immdSize = 0;
     one_byte_opcode_map[15][15][0].modRM = true;
-    one_byte_opcode_map[15][15][0].instruction = &inc_dec_rm_32bit;
+    one_byte_opcode_map[15][15][0].instruction = &inc_dec_rm;
+
+    for (i = 0; i < 16; i++) {
+        one_byte_opcode_map[4][i][0].immdSize = 0;
+        one_byte_opcode_map[4][i][0].modRM = false;
+        one_byte_opcode_map[4][i][0].instruction = &inc_dec_reg_alt_32bit;
+    }
 
     // CMP
     one_byte_opcode_map[3][12][0].immdSize = 1;
