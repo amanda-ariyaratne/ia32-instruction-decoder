@@ -145,6 +145,9 @@ void decode(int* instructions, int bytes)
         // Execute Instruction
         opcode_details.instruction(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
 
+        // get a register dump
+        dump();
+
         // Reset Variables Before Next Instruction
         prefix = 0;
         esc_1 = -1;
