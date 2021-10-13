@@ -236,9 +236,7 @@ void init_one_byte_opcode_map(){
     two_byte_opcode_map[10][0][0].modRM = false;
     two_byte_opcode_map[10][0][0].instruction = &push_segment_register_2;
 
-    two_byte_opcode_map[10][8][0].immdSize = 0;
-    two_byte_opcode_map[10][8][0].modRM = false;
-    two_byte_opcode_map[10][8][0].instruction = &push_segment_register_2;
+
 
     // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
@@ -280,6 +278,14 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[2][11][0].immdSize = 0;
     one_byte_opcode_map[2][11][0].modRM = true;
     one_byte_opcode_map[2][11][0].instruction = &sub_rm_from_reg;
+}
+
+void init_one_byte_opcode_map()
+{
+    // PUSH
+    two_byte_opcode_map[10][8][0].immdSize = 0;
+    two_byte_opcode_map[10][8][0].modRM = false;
+    two_byte_opcode_map[10][8][0].instruction = &push_segment_register_2;
 }
 
 #endif
