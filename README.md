@@ -2,8 +2,7 @@
 
 ## Run program
 
-gcc -o out.o main.c
-./out.o
+gcc -o out.o main.c && ./out.o
 
 ## Version control
 rm *.o

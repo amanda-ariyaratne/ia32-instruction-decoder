@@ -5,3 +5,4 @@
 #include "instruction_impl/mov.c"
 #include "instruction_impl/cmp.c"
 #include "instruction_impl/inc_dec.c"
+#include "instruction_impl/sub.c"
