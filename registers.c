@@ -206,7 +206,7 @@ unsigned int es =  0x7b;
 unsigned int fs =  0x0;
 unsigned int gs =  0x33;
 
-int sreg(int sreg_addr)
+int sreg_load(int sreg_addr)
 {
     switch(sreg_addr)
     {
@@ -222,6 +222,27 @@ int sreg(int sreg_addr)
             return fs;
         case 5:
             return gs;
+        default:
+            exit(1);
+    }
+}
+
+int sreg_store(int sreg_addr, int val)
+{
+    switch(sreg_addr)
+    {
+        case 0:
+            es = val;
+        case 1:
+            cs = val;
+        case 2:
+            ss = val;
+        case 3:
+            ds = val;
+        case 4:
+            fs = val;
+        case 5:
+            gs = val;
         default:
             exit(1);
     }

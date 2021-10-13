@@ -232,15 +232,29 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[1][6][0].modRM = false;
     one_byte_opcode_map[1][6][0].instruction = &push_segment_register_1;
 
-    two_byte_opcode_map[10][0][0].immdSize = 0;
-    two_byte_opcode_map[10][0][0].modRM = false;
-    two_byte_opcode_map[10][0][0].instruction = &push_segment_register_2;
+    // POP
+    one_byte_opcode_map[8][15][0].immdSize = 0;
+    one_byte_opcode_map[8][15][0].modRM = true;
+    one_byte_opcode_map[8][15][0].instruction = &group1A_8F_reg_or_mem;
 
+    for (i = 0; i < 8; i ++)
+    {
+        one_byte_opcode_map[5][8+i][0].immdSize = 0;
+        one_byte_opcode_map[5][8+i][0].modRM = false;
+        one_byte_opcode_map[5][8+i][0].instruction = &pop_to_register_alt;
+    }
+    
+    one_byte_opcode_map[1][15][0].immdSize = 0;
+    one_byte_opcode_map[1][15][0].modRM = false;
+    one_byte_opcode_map[1][15][0].instruction = &pop_to_segment_register_1;
 
+    one_byte_opcode_map[0][7][0].immdSize = 0;
+    one_byte_opcode_map[0][7][0].modRM = false;
+    one_byte_opcode_map[0][7][0].instruction = &pop_to_segment_register_1;
 
-    // one_byte_opcode_map[][][0].immdSize = ;
-    // one_byte_opcode_map[][][0].modRM = ;
-    // one_byte_opcode_map[][][0].instruction = &;
+    one_byte_opcode_map[1][7][0].immdSize = 0;
+    one_byte_opcode_map[1][7][0].modRM = false;
+    one_byte_opcode_map[1][7][0].instruction = &pop_to_segment_register_1;
 
     //SUB
     one_byte_opcode_map[2][12][0].immdSize = 1;
@@ -278,14 +292,32 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[2][11][0].immdSize = 0;
     one_byte_opcode_map[2][11][0].modRM = true;
     one_byte_opcode_map[2][11][0].instruction = &sub_rm_from_reg;
+
+    // one_byte_opcode_map[][][0].immdSize = ;
+    // one_byte_opcode_map[][][0].modRM = ;
+    // one_byte_opcode_map[][][0].instruction = &;
 }
 
-void init_one_byte_opcode_map()
+void init_two_byte_opcode_map()
 {
     // PUSH
     two_byte_opcode_map[10][8][0].immdSize = 0;
     two_byte_opcode_map[10][8][0].modRM = false;
     two_byte_opcode_map[10][8][0].instruction = &push_segment_register_2;
+
+    two_byte_opcode_map[10][0][0].immdSize = 0;
+    two_byte_opcode_map[10][0][0].modRM = false;
+    two_byte_opcode_map[10][0][0].instruction = &push_segment_register_2;
+
+    // POP
+
+    two_byte_opcode_map[10][1][0].immdSize = 0;
+    two_byte_opcode_map[10][1][0].modRM = false;
+    two_byte_opcode_map[10][1][0].instruction = &pop_segment_register_2;
+
+    two_byte_opcode_map[10][9][0].immdSize = 0;
+    two_byte_opcode_map[10][9][0].modRM = false;
+    two_byte_opcode_map[10][9][0].instruction = &pop_segment_register_2;
 }
 
 #endif
