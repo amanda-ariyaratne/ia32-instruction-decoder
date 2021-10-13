@@ -170,7 +170,7 @@ void init_one_byte_opcode_map(){
     
     one_byte_opcode_map[15][15][0].immdSize = 0;
     one_byte_opcode_map[15][15][0].modRM = true;
-    one_byte_opcode_map[15][15][0].instruction = &inc_dec_rm;
+    one_byte_opcode_map[15][15][0].instruction = &group5_reg_or_mem;
 
     for (i = 0; i < 16; i++) {
         one_byte_opcode_map[4][i][0].immdSize = 0;
@@ -214,6 +214,11 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[3][11][0].immdSize = 0;
     one_byte_opcode_map[3][11][0].modRM = true;
     one_byte_opcode_map[3][11][0].instruction = &cmp_rm_with_reg_32bit;
+
+    // PUSH
+    one_byte_opcode_map[15][15][0].immdSize = 0;
+    one_byte_opcode_map[15][15][0].modRM = true;
+    one_byte_opcode_map[15][15][0].instruction = &group5_reg_or_mem;
 
     // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
