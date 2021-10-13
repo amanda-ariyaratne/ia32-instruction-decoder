@@ -241,3 +241,16 @@ int next_instruction()
 }
 
 #endif
+
+#ifndef REGISTER_DUMP
+#define REGISTER_DUMP
+
+void dump() {
+    printf("\n****************************************************************************\n");
+    printf("General Purpose Registers\n EAX=%d\t ECX=%d\t EDX=%d\t EBX=%d\t ESP EBP=%d\t ESI=%d\t EDI=%d\n\n", eax, ecx, edx, ebx, esp, esi, edi);
+    printf("Segment Registers\n CS=%d\t SS=%d\t DS=%d\t ES=%d\t FS=%d\t GS=%d\n\n", cs,ss,ds,es,fs,gs);
+    printf("Instruction Pointer\n EIP=%d\n", eip);
+    printf("******************************************************************************\n");
+}
+
+#endif
