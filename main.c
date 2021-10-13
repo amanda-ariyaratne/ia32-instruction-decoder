@@ -32,6 +32,7 @@ int main() {
     fclose(fptr);
 
     init_one_byte_opcode_map();
+    init_two_byte_opcode_map();
 
     /** Decode **/
 
