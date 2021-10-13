@@ -5,6 +5,7 @@
 #include "instruction_impl/cmp.c"
 #include "instruction_impl/inc_dec.c"
 #include "instruction_impl/sub.c"
+#include "instruction_impl/push.c"
 
 #include "instruction_impl/imm_grp_1A.c"
 #include "instruction_impl/group5.c"
