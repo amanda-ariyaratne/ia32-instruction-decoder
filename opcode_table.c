@@ -280,7 +280,7 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[2][11][0].instruction = &sub_rm_from_reg;
 }
 
-void init_one_byte_opcode_map()
+void init_two_byte_opcode_map()
 {
     // PUSH
     two_byte_opcode_map[10][8][0].immdSize = 0;
