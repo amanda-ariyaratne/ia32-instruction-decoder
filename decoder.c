@@ -79,9 +79,9 @@ void decode(int* instructions, int bytes)
             if(isSIBPresent(mod, rm))
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
-                scale = byte & 7;
+                base = byte & 7;
                 index = (byte & 56) >> 3;
-                base = (byte & 192) >> 6;
+                scale = (byte & 192) >> 6;
             }
 
             disSize = getDisSize(mod, rm, base);
@@ -115,21 +115,19 @@ void decode(int* instructions, int bytes)
                 byte = getNextByte(instructions, ++cur_byte, bytes);
                 immd = ((immd << 8) + byte);
             }
-
         }
 
         // displacement only
         if (opcode_details.immdSize & !opcode_details.modRM)
         {
             reg_or_op = opcode & 7;
-
             dis = 0;
             for (int i = 0; i < opcode_details.immdSize; i++)
             {
                 byte = getNextByte(instructions, ++cur_byte, bytes);
                 dis = ((dis << 8) + byte);
             }
-
+            immd = dis;
         }
 
         // Execute Instruction

@@ -1,9 +1,9 @@
 **************************************INSTRUCTION**************************************
-opcode b0, mod -1, reg_or_op 0, rm -1, scale -1, index -1, base -1, dis 0, immd -1
+opcode 8d, mod 0, reg_or_op 0, rm 4, scale 0, index 4, base 1, dis -1, immd -1
 
 Flags 246
 General Purpose Registers
- EAX=bf8db100	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
  CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
@@ -11,12 +11,13 @@ Segment Registers
 Instruction Pointer
  EIP=8048354
 
+MEMORY
 **************************************INSTRUCTION**************************************
-opcode b1, mod -1, reg_or_op 1, rm -1, scale -1, index -1, base -1, dis 1, immd -1
+opcode 3d, mod -1, reg_or_op -1, rm -1, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 246
+Flags 287
 General Purpose Registers
- EAX=bf8db100	 ECX=88c5cf01	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
  CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
@@ -24,12 +25,13 @@ Segment Registers
 Instruction Pointer
  EIP=8048354
 
+MEMORY
 **************************************INSTRUCTION**************************************
-opcode 22, mod 3, reg_or_op 0, rm 1, scale -1, index -1, base -1, dis -1, immd -1
+opcode 00, mod 0, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 246
+Flags 286
 General Purpose Registers
- EAX=bf8db100	 ECX=88c5cf01	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
  CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
@@ -37,574 +39,78 @@ Segment Registers
 Instruction Pointer
  EIP=8048354
 
+MEMORY
+address 88c5cffb 	 value fb
 **************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
+opcode 00, mod 0, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 518
+Flags 287
 General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
+ CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
 
 Instruction Pointer
- EIP=134513492
+ EIP=8048354
 
+MEMORY
+address 88c5cffb 	 value f6
 **************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
+opcode 8d, mod 0, reg_or_op 0, rm 4, scale 0, index 4, base 1, dis -1, immd -1
 
-Flags 518
+Flags 246
 General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
+ CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
 
 Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233082	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
+ EIP=8048354
 
 MEMORY
 **************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
+opcode 3d, mod -1, reg_or_op -1, rm -1, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 518
+Flags 287
 General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
+ CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
 
 Instruction Pointer
- EIP=134513492
+ EIP=8048354
 
 MEMORY
 **************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
+opcode 00, mod 0, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 519
+Flags 286
 General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
+ CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
 
 Instruction Pointer
- EIP=134513492
+ EIP=8048354
 
 MEMORY
+address 88c5cffb 	 value fb
 **************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
+opcode 00, mod 0, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
 
-Flags 519
+Flags 287
 General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
+ EAX=88c5cffb	 ECX=88c5cffb	 EDX=1	 EBX=ae5ff4	 ESP=bf8db0bc EBP=bf8db118	 ESI=9a0ca0	 EDI=0
 
 Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
+ CS=73	 SS=7b	 DS=7b	 ES=7b	 FS=0	 GS=33
 
 Instruction Pointer
- EIP=134513492
+ EIP=8048354
 
 MEMORY
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 0, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233220	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-MEMORY
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 518
-General Purpose Registers
- EAX=-1081233083	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-MEMORY
-address bf8db0b8 	 value bf8db145
-**************************************INSTRUCTION**************************************
-opcode fe, mod 3, reg_or_op 1, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233224	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-MEMORY
-address bf8db0b8 	 value bf8db145
-**************************************INSTRUCTION**************************************
-opcode ff, mod 3, reg_or_op 6, rm 0, scale -1, index -1, base -1, dis -1, immd -1
-
-Flags 519
-General Purpose Registers
- EAX=-1081233084	 ECX=-2000302085	 EDX=1	 EBX=11427828	 ESP EBP=-1081233228	 ESI=10095776	 EDI=0
-
-Segment Registers
- CS=115	 SS=123	 DS=123	 ES=123	 FS=0	 GS=51
-
-Instruction Pointer
- EIP=134513492
-
-MEMORY
-address bf8db0b4 	 value bf8db144
-address bf8db0b8 	 value bf8db145
+address 88c5cffb 	 value f6
