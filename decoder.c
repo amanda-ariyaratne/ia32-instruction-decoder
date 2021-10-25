@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include <string.h>
 #include "enums.c"
 #include "opcode_table.c"
 
@@ -142,10 +141,7 @@ void decode(int* instructions, int bytes)
         opcode_details.instruction(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
 
         // get a register dump
-        char destination[] = "sample-1";
-        char source[] = "-out.txt";
-        strcat(destination,source);
-        dump(destination, opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
+        dump(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
 
         // Reset Variables Before Next Instruction
         prefix = 0;
