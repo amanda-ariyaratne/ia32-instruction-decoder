@@ -156,7 +156,7 @@ void and_immd_to_al_8bit(int opcode, int mod, int reg, int rm, int scale, int in
     printf("INS: And imm8 to AL\n");
 
     int w_bit = 0;
-    unsigned int op1 = reg_load(0, w_bit);   // TODO: remove hardcode val of register 0
+    unsigned int op1 = reg_load(0, w_bit);
     unsigned int op2 = immd;
 
     unsigned int val = op1 & op2;
@@ -168,7 +168,7 @@ void and_immd_to_eax_32bit(int opcode, int mod, int reg, int rm, int scale, int 
 {
     printf("INS: And imm32 to EAX\n");
     int w_bit = 1;
-    unsigned int op1 = reg_load(0, w_bit);   // TODO: remove hardcode val of register 0
+    unsigned int op1 = reg_load(0, w_bit);
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;
