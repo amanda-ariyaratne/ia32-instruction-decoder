@@ -132,16 +132,12 @@ void decode(int* instructions, int bytes)
 
         }
 
-        printf("prefix %d", prefix);
-        printf("esc_1 %d", esc_1);
-        printf("esc_2 %d", esc_2);
-        printf("opcode %d", opcode);
-
         // Execute Instruction
         opcode_details.instruction(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
 
         // get a register dump
-        dump(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
+        regDump(opcode, mod, reg_or_op, rm, scale, index, base, dis, immd);
+        memDump();
 
         // Reset Variables Before Next Instruction
         prefix = 0;
