@@ -51,20 +51,20 @@ AND, MOV, reg<br>
 B0 00 B1 01 22 C1
 
 ### Add two numbers and store them in the mem(val of CL)
-1. C6 00 01 # store 1 in effective address of 00 000 001 (00 + ECX -> CL)
+1. C6 01 01 # store 1 in effective address of 00 000 001 (00 + ECX -> CL)
 2. B0 01 # mov 1 to eax
 3. 00 01 # mem <- mem+reg (00 000 001 -> 000(AL) 00 001 addrof(value of CL))
 
 ADD, MOV, Mem load<br>
-C6 00 01 B0 01 00 01
+C6 01 01 B0 01 00 01
 
-### Sub two numbers and store in the addr in the displacement
-1. C6 45 00 01 (mod RM-> 01 000 101)
+### Sub two numbers and store in the addr from SIB
+1. C6 01 01 # store 1 in effective address of 00 000 001 (00 + ECX -> CL)
 2. B0 01 # mov 1 to eax
-3. 28 45
+3. 28 01 # mem <- mem-reg (00 000 001 -> 000(AL) 00 001 addrof(value of CL))
 
 SUB, MOV, Mem load using displacement<br>
-C6 45 00 01 B0 01 28 45
+C6 01 01 B0 01 28 01
 
 ### Load effective address and store it in EAX and check greater than 0
 1. 8D 04 21 # modrm 00 000 100 sib 00 100 001 (store addr val of ECX in EAX)
