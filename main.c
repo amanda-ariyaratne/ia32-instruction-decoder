@@ -6,10 +6,10 @@
 
 int convertHexToInt(char c);
 
-int main() {
+int main(int argc, char *argv[]) {
     FILE *fptr;
 
-    fptr = fopen("sample.txt", "r");
+    fptr = fopen(argv[1], "r");
     int *instructions = malloc(1000 * sizeof(int));
     int len = 0;
     char c;

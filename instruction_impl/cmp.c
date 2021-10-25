@@ -7,8 +7,6 @@
 #ifndef CMP
 #define CMP
 
-// TODO : Set AF and PF flags accordingly
-
 void setCmpFlags(unsigned int op1, unsigned int op2, unsigned int val, int w_bit);
 
 void cmp_immd_with_al_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)

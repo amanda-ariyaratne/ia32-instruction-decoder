@@ -7,8 +7,6 @@
 #ifndef ADD
 #define ADD
 
-// TODO : Set AF and PF flags accordingly
-
 void add_reg1_to_reg2(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = opcode & 1;
@@ -102,7 +100,7 @@ void add_immd_to_reg_32bit_sign_extended(int opcode, int mod, int reg, int rm, i
 void add_immd_to_eax(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
     int w_bit = (opcode & 1);
-    unsigned int op1 = reg_load(0, w_bit);   // TODO: remove hardcode val of register 0
+    unsigned int op1 = reg_load(0, w_bit);
     unsigned int op2 = immd;
 
     unsigned int val = op1 + op2;

@@ -32,7 +32,7 @@ void clear_flag_rf(){eflags &= ~(1 << 16);}
 void set_flag_nt(){eflags |= (1 << 14);}
 void clear_flag_nt(){eflags &= ~(1 << 14);}
 
-void set_flag_iopl(){}  // TODO
+void set_flag_iopl(){}
 void clear_flag_iopl(){}
 
 void set_flag_of(){eflags |= (1 << 11);}
