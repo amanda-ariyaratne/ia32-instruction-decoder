@@ -110,6 +110,7 @@ void mov_rm_to_reg_32bit(int opcode, int mod, int reg, int rm, int scale, int in
 // immediate value 8bit
 void mov_immd_to_reg_8bit(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
+    immd = dis;
     int w_bit = 0;
     unsigned int op2 = immd;
 
