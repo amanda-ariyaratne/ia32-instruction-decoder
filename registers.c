@@ -275,18 +275,11 @@ void regDump(int opcode, int mod, int reg, int rm, int scale, int index, int bas
     }
     fprintf(fptr, "**************************************INSTRUCTION**************************************\n");
     fprintf(fptr, "opcode %x%x, mod %d, reg_or_op %d, rm %d, scale %d, index %d, base %d, dis %d, immd %d\n\n", opcode >> 4, opcode & 0x0f, mod, reg, rm, scale, index, base, dis, immd);
-    fprintf(fptr, "Flags %d\n", flags());
-    fprintf(fptr, "General Purpose Registers\n EAX=%d\t ECX=%d\t EDX=%d\t EBX=%d\t ESP EBP=%d\t ESI=%d\t EDI=%d\n\n", eax, ecx, edx, ebx, esp, esi, edi);
-    fprintf(fptr, "Segment Registers\n CS=%d\t SS=%d\t DS=%d\t ES=%d\t FS=%d\t GS=%d\n\n", cs,ss,ds,es,fs,gs);
-    fprintf(fptr, "Instruction Pointer\n EIP=%d\n\n", eip);
+    fprintf(fptr, "Flags %x\n", flags());
+    fprintf(fptr, "General Purpose Registers\n EAX=%x\t ECX=%x\t EDX=%x\t EBX=%x\t ESP=%x EBP=%x\t ESI=%x\t EDI=%x\n\n", eax, ecx, edx, ebx, esp, ebp, esi, edi);
+    fprintf(fptr, "Segment Registers\n CS=%x\t SS=%x\t DS=%x\t ES=%x\t FS=%x\t GS=%x\n\n", cs,ss,ds,es,fs,gs);
+    fprintf(fptr, "Instruction Pointer\n EIP=%x\n\n", eip);
     fclose(fptr);
-
-    printf("**************************************INSTRUCTION**************************************\n");
-    printf("opcode %x%x, mod %d, reg_or_op %d, rm %d, scale %d, index %d, base %d, dis %d, immd %d\n\n", opcode >> 4, opcode & 0x0f, mod, reg, rm, scale, index, base, dis, immd);
-    printf("Flags %d\n", flags());
-    printf("General Purpose Registers\n EAX=%d\t ECX=%d\t EDX=%d\t EBX=%d\t ESP EBP=%d\t ESI=%d\t EDI=%d\n\n", eax, ecx, edx, ebx, esp, esi, edi);
-    printf("Segment Registers\n CS=%d\t SS=%d\t DS=%d\t ES=%d\t FS=%d\t GS=%d\n\n", cs,ss,ds,es,fs,gs);
-    printf("Instruction Pointer\n EIP=%d\n\n", eip);
 }
 
 #endif

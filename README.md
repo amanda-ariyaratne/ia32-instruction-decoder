@@ -73,7 +73,7 @@ C6 45 00 01 B0 01 28 45
 LEA, CMP<br>
 8D 04 21 3D 00 00 00 00
 
-### Increment eax value by 1 and Decrement it again then push to the stack
+### Increment eax value by 1, push value and Decrement it again, push to the stack
 1. FE C0 (11 000 000)
 2. FF F0 (11 110 000)
 3. FE C8 (11 001 000)
