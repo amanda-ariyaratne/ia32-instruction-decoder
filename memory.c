@@ -64,4 +64,21 @@ void mem_store(unsigned int addr, int w, unsigned int val)
    return;
 }
 
+void memDump() {
+    FILE *fptr;
+    fptr = fopen("log.txt", "a");
+    if(fptr == NULL){
+        printf("ERROR: No such file exist");   
+        exit(1);             
+    }
+    fprintf(fptr, "MEMORY\n");
+    int i;
+    for (i = 0; i < SIZE; i++) {
+        if (mem[i] != NULL) {
+            fprintf(fptr, "address %x \t value %x\n", mem[i]->addr, mem[i]->val);
+        }
+    }
+    fclose(fptr);
+}
+
 #endif

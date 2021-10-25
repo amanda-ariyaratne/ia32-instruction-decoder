@@ -66,18 +66,18 @@ C6 01 01 B0 01 00 01
 SUB, MOV, Mem load using displacement<br>
 C6 01 01 B0 01 28 01
 
-### Load effective addr and store it in EAX and check greater than 0
-1. 8D 04 21 # modrm 00 002 100 sib 00 100 001 (store addr val in ECX in EAX)
+### Load effective address and store it in EAX and check greater than 0
+1. 8D 04 21 # modrm 00 000 100 sib 00 100 001 (store addr val of ECX in EAX)
 2. 3D 00 00 00 00
 
 LEA, CMP<br>
 8D 04 21 3D 00 00 00 00
 
-### Increment eax value by 1, push value and Decrement it again, push to the stack
+### Increment eax value by 1, push value to stack, decrement it again, push to the stack
 1. FE C0 (11 000 000)
-2. 0F FF F0 (11 110 000)
+2. FF F0 (11 110 000)
 3. FE C8 (11 001 000)
-4. 0F FF F0 (11 110 000)
+4. FF F0 (11 110 000)
 
 INC, DEC, PUSH<br>
-FE C0 0F FF F0 FE C8 0F FF F0
+FE C0 FF F0 FE C8 FF F0

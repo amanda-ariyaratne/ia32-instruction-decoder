@@ -266,7 +266,7 @@ int next_instruction()
 #ifndef REGISTER_DUMP
 #define REGISTER_DUMP
 
-void dump(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd) {
+void regDump(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd) {
     FILE *fptr;
     fptr = fopen("log.txt", "a");
     if(fptr == NULL){
