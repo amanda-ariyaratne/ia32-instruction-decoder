@@ -18,7 +18,7 @@ void inc_dec_reg(int opcode, int mod, int reg, int rm, int scale, int index, int
 
     if (reg == 0)
         val = op1 + op2;
-    else
+    if (reg == 1)
         val = op1 - op2;
 
     setAddFlags(op1, op2, val, w_bit);
@@ -37,7 +37,7 @@ void inc_dec_mem(int opcode, int mod, int reg, int rm, int scale, int index, int
 
     if (reg == 0)
         val = op1 + op2;
-    else
+    if (reg == 1)
         val = op1 - op2;
 
     setAddFlags(op1, op2, val, w_bit);

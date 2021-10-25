@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 
 #ifndef EFLAGS
 #define EFLAGS
@@ -266,12 +267,20 @@ int next_instruction()
 #ifndef REGISTER_DUMP
 #define REGISTER_DUMP
 
-void dump() {
-    printf("\n****************************************************************************\n");
-    printf("General Purpose Registers\n EAX=%d\t ECX=%d\t EDX=%d\t EBX=%d\t ESP EBP=%d\t ESI=%d\t EDI=%d\n\n", eax, ecx, edx, ebx, esp, esi, edi);
-    printf("Segment Registers\n CS=%d\t SS=%d\t DS=%d\t ES=%d\t FS=%d\t GS=%d\n\n", cs,ss,ds,es,fs,gs);
-    printf("Instruction Pointer\n EIP=%d\n", eip);
-    printf("******************************************************************************\n");
+void dump(char *file_path, int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd) {
+    FILE *fptr;
+    fptr = fopen(file_path, "a");
+    if(fptr == NULL){
+        printf("ERROR: No such file exist");   
+        exit(1);             
+    }
+    fprintf(fptr, "**************************************INSTRUCTION**************************************\n");
+    fprintf(fptr, "opcode %x%x, mod %d, reg_or_op %d, rm %d, scale %d, index %d, base %d, dis %d, immd %d\n\n", opcode >> 4, opcode & 0x0f, mod, reg, rm, scale, index, base, dis, immd);
+    fprintf(fptr, "Flags %d\n", flags());
+    fprintf(fptr, "General Purpose Registers\n EAX=%d\t ECX=%d\t EDX=%d\t EBX=%d\t ESP EBP=%d\t ESI=%d\t EDI=%d\n\n", eax, ecx, edx, ebx, esp, esi, edi);
+    fprintf(fptr, "Segment Registers\n CS=%d\t SS=%d\t DS=%d\t ES=%d\t FS=%d\t GS=%d\n\n", cs,ss,ds,es,fs,gs);
+    fprintf(fptr, "Instruction Pointer\n EIP=%d\n\n", eip);
+    fclose(fptr);
 }
 
 #endif
