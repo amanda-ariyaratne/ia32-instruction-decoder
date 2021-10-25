@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
 
     if (fptr == NULL)
     {
-        printf("The file does not exist. Exit Program.");
+        printf("\nThe file does not exist. Exit Program.");
         exit(1);
     }
 
@@ -90,7 +90,7 @@ int convertHexToInt(char c)
         case 'F':
             return 15;
         default:
-            printf("Invalid input. Exit Program.");
+            printf("\nInvalid input. Exit Program.");
             exit(1);
     }
 }

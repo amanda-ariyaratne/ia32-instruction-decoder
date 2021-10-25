@@ -125,7 +125,6 @@ unsigned int reg_load(int reg_num, int w)
                 exit(1);
         }   
     }
-    printf("%d %d", eax, edx);
 }
 
 void reg_store(int reg_num, int w, unsigned int val)

@@ -16,7 +16,6 @@ void sub_reg1_from_reg2(int opcode, int mod, int reg, int rm, int scale, int ind
 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
-    printf("INS: sub_reg1_from_reg2 %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_reg2_from_reg1(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -28,7 +27,6 @@ void sub_reg2_from_reg1(int opcode, int mod, int reg, int rm, int scale, int ind
 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
-    printf("INS: sub_reg2_from_reg1 %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_mem_from_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -41,7 +39,6 @@ void sub_mem_from_reg(int opcode, int mod, int reg, int rm, int scale, int index
 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
-    printf("INS: sub_mem_from_reg %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_reg_from_mem(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -54,7 +51,6 @@ void sub_reg_from_mem(int opcode, int mod, int reg, int rm, int scale, int index
 
     setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
-    printf("INS: sub_reg_from_mem %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_immd_from_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -66,7 +62,6 @@ void sub_immd_from_reg(int opcode, int mod, int reg, int rm, int scale, int inde
 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
-    printf("INS: sub_immd_from_reg %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_immd_from_eax(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -78,7 +73,6 @@ void sub_immd_from_eax(int opcode, int mod, int reg, int rm, int scale, int inde
 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(0, w_bit, val);
-    printf("INS: sub_immd_from_eax %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_immd_from_mem(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -92,7 +86,6 @@ void sub_immd_from_mem(int opcode, int mod, int reg, int rm, int scale, int inde
 
     setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
-    printf("INS: sub_immd_from_mem %d - %d = %d \n", op1, op2, val);
 }
 
 void sub_reg_from_rm(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)

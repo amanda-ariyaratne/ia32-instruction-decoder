@@ -26,8 +26,6 @@ unsigned int mem_load(unsigned int addr, int w) {
             else
                 return (mem[hashIndex]->val) & 255;
         }
-            
-      
         ++hashIndex;
         hashIndex %= SIZE;
    }        

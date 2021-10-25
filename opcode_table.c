@@ -21,6 +21,7 @@ struct Opcode three_byte_opcode_map_1[16][16][12];
 struct Opcode three_byte_opcode_map_2[16][16][12];
 
 void init_one_byte_opcode_map(){
+
     // ADD
     one_byte_opcode_map[0][4][0].immdSize = 1;
     one_byte_opcode_map[0][4][0].modRM = false;
@@ -293,6 +294,9 @@ void init_one_byte_opcode_map(){
     one_byte_opcode_map[2][11][0].modRM = true;
     one_byte_opcode_map[2][11][0].instruction = &sub_rm_from_reg;
 
+    /* DO NOT DELETE                */
+    /* Template for an opcode entry */
+
     // one_byte_opcode_map[][][0].immdSize = ;
     // one_byte_opcode_map[][][0].modRM = ;
     // one_byte_opcode_map[][][0].instruction = &;
@@ -310,7 +314,6 @@ void init_two_byte_opcode_map()
     two_byte_opcode_map[10][0][0].instruction = &push_segment_register_2;
 
     // POP
-
     two_byte_opcode_map[10][1][0].immdSize = 0;
     two_byte_opcode_map[10][1][0].modRM = false;
     two_byte_opcode_map[10][1][0].instruction = &pop_segment_register_2;
