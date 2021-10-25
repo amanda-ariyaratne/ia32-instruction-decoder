@@ -107,7 +107,7 @@ void decode(int* instructions, int bytes)
             }
         }
 
-        if (opcode_details.immdSize & opcode_details.modRM)
+        if (opcode_details.immdSize && opcode_details.modRM)
         {
             immd = 0;
             for (int i = 0; i < opcode_details.immdSize; i++)
@@ -118,7 +118,7 @@ void decode(int* instructions, int bytes)
         }
 
         // displacement only
-        if (opcode_details.immdSize & !opcode_details.modRM)
+        if (opcode_details.immdSize && !opcode_details.modRM)
         {
             reg_or_op = opcode & 7;
             dis = 0;
