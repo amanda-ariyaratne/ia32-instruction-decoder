@@ -74,8 +74,6 @@ void add_rm_to_reg(int opcode, int mod, int reg, int rm, int scale, int index, i
 
 void add_immd_to_reg(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("INS: Add imm8 to reg 8bit\n");
-
     int w_bit = opcode & 1;
     unsigned int op1 = reg_load(rm, w_bit);
     unsigned int op2 = immd;
@@ -87,7 +85,6 @@ void add_immd_to_reg(int opcode, int mod, int reg, int rm, int scale, int index,
 
 void add_immd_to_reg_32bit_sign_extended(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
 {
-    printf("INS: Add imm8 to reg 32bit sign extended\n");
     int w_bit = 1;
     unsigned int op1 = reg_load(rm, w_bit);
     unsigned int op2 = sign_extend(immd);

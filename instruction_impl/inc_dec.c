@@ -24,7 +24,6 @@ void inc_dec_reg(int opcode, int mod, int reg, int rm, int scale, int index, int
     setAddFlags(op1, op2, val, w_bit);
     reg_store(rm, w_bit, val);
 
-    printf("INS: Inc/Dec - reg %d, %d op %d = %d \n", reg, op1, op2, val);
 }
 
 void inc_dec_mem(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -43,7 +42,6 @@ void inc_dec_mem(int opcode, int mod, int reg, int rm, int scale, int index, int
     setAddFlags(op1, op2, val, w_bit);
     mem_store(addr, w_bit, val);
 
-    printf("INS: Inc/Dec reg 32bit - reg %d, %d op %d = %d \n", reg, op1, op2, val);
 }
 
 void inc_dec_rm(int opcode, int mod, int reg, int rm, int scale, int index, int base, unsigned int dis, unsigned int immd)
@@ -71,7 +69,6 @@ void inc_dec_reg_alt_32bit(int opcode, int mod, int reg, int rm, int scale, int 
     setAddFlags(op1, op2, val, w_bit);
     reg_store(reg, w_bit, val);
 
-    printf("INS: Inc/Dec reg 32bit - reg %d, %d op %d = %d \n", reg, op1, op2, val);
 }
 
 #endif

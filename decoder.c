@@ -43,26 +43,22 @@ void decode(int* instructions, int bytes)
         {
             prefix = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
-            printf("prefix %d \n", byte);
         }
 
         if (byte == OP_2_BYTE_ESCAPE)
         {
             esc_1 = byte;
             byte = getNextByte(instructions, ++cur_byte, bytes);
-            printf("escape1 %d \n", byte);
         } 
 
         if (esc_1 == OP_2_BYTE_ESCAPE && (byte == OP_3_BYTE_ESCAPE_1 || byte == OP_3_BYTE_ESCAPE_2))
         {
             esc_2 = byte;
-            printf("escape2 %d \n", byte);
             byte = getNextByte(instructions, ++cur_byte, bytes);
             
         }
         
         opcode = byte;
-        printf("opcode %d %d \n", byte >> 4, byte & 0x0f);
 
         struct Opcode opcode_details;
         if (esc_1 == -1)
@@ -80,10 +76,6 @@ void decode(int* instructions, int bytes)
             rm = byte & 7;
             reg_or_op = (byte & 56) >> 3;
             mod = (byte & 192) >> 6;
-
-            printf("mod %d \n", mod);
-            printf("reg or op %d \n", reg_or_op);
-            printf("rm %d \n", rm);
 
             if(isSIBPresent(mod, rm))
             {
@@ -125,7 +117,6 @@ void decode(int* instructions, int bytes)
                 immd = ((immd << 8) + byte);
             }
 
-            printf("immediate %d \n", immd);
         }
 
         // displacement only
@@ -140,7 +131,6 @@ void decode(int* instructions, int bytes)
                 dis = ((dis << 8) + byte);
             }
 
-            printf("displacement %d \n", dis);
         }
 
         // Execute Instruction
