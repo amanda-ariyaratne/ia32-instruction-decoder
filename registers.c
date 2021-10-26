@@ -273,7 +273,7 @@ void regDump(int opcode, int mod, int reg, int rm, int scale, int index, int bas
         printf("ERROR: No such file exist");   
         exit(1);             
     }
-    fprintf(fptr, "**************************************INSTRUCTION**************************************\n");
+    fprintf(fptr, "\n\n**************************************INSTRUCTION**************************************\n");
     fprintf(fptr, "opcode %x%x, mod %d, reg_or_op %d, rm %d, scale %d, index %d, base %d, dis %d, immd %d\n\n", opcode >> 4, opcode & 0x0f, mod, reg, rm, scale, index, base, dis, immd);
     fprintf(fptr, "Flags %x\n", flags());
     fprintf(fptr, "General Purpose Registers\n EAX=%x\t ECX=%x\t EDX=%x\t EBX=%x\t ESP=%x EBP=%x\t ESI=%x\t EDI=%x\n\n", eax, ecx, edx, ebx, esp, ebp, esi, edi);
